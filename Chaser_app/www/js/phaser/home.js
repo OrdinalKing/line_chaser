@@ -107,7 +107,11 @@ class HomeScreen extends Phaser.Scene{
             game.scene.stop('HomeScreen');
             game.scene.start('GameScreen');
         });
-
+        if(userData.heart == 0)
+        {
+            this.play.disableInteractive();
+            this.play.setAlpha(0.5);
+        }
         this.setting = this.add.image(810,450,'Setting');
         this.setting.setInteractive().on('pointerdown', () => {
             game.domContainer.style.display = 'block';
@@ -271,6 +275,16 @@ class HomeScreen extends Phaser.Scene{
         }
         this.coinText.setText(userData.coin);
         this.pointText.setText(userData.point);
+        if(userData.heart == 0)
+        {
+            this.play.disableInteractive();
+            this.play.setAlpha(0.5);
+        }
+        else
+        {
+            this.play.setInteractive();
+            this.play.setAlpha(1);
+        }
     }
     toast_tournament_failed(){
         // var toast = this.rexUI.add.toast({
