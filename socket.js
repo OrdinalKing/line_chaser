@@ -41,7 +41,7 @@ const exportedMethods = {
 
             socket.on('login', (data) => {
                 // console.log('login request recevied');
-                if(!players[data.username])
+                if(!players[data.username] || players[data.username] == socket.id)
                     users.getUserByName(data.username, data.password).then((result) => {
                         if (result) {
                             players[data.username] = socket.id;
