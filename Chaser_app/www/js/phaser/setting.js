@@ -80,6 +80,12 @@ class SettingScreen extends Phaser.Scene{
 
         this.admobButton = this.add.image(270,570,'ReviveAdmob').setScale(0.7);
         this.admobButton.setInteractive().on('pointerdown', () => {
+            // AdMob.showInterstitial();
+            // AdMob.prepareInterstitial({
+            //     adId: admobid.interstitial,
+            //     autoShow:false,
+            //     isTesting: true,
+            // });
             userData.heart = (Number.parseInt(userData.heart) + 1) > 3 ? 3 : (Number.parseInt(userData.heart) + 1);
             Client.level_end(1, 0, 0);
             for(let i=0; i<3; i++)
@@ -89,12 +95,6 @@ class SettingScreen extends Phaser.Scene{
                 else
                     this.hearts[i].setVisible(true);
             }
-            AdMob.showInterstitial();
-            AdMob.prepareInterstitial({
-                adId: admobid.interstitial,
-                autoShow:false,
-                isTesting: true,
-            });
         });
         this.coinButton = this.add.image(810,570,'ReviveCoin').setScale(0.7);
         this.coinButton.setInteractive().on('pointerdown', () => {

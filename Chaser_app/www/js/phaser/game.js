@@ -116,6 +116,17 @@ class GameScreen extends Phaser.Scene{
         //     align: 'center',
         // });
 
+        var bar_path = [];
+        for(let i=target_position-target_width-1; i<target_position+target_width; i++)
+        {
+            bar_path.push(this.path[i]);
+        }
+        let bounds = new Phaser.Geom.Rectangle;
+        let curve = new Phaser.Curves.Spline(bar_path);
+        curve.getBounds(bounds);
+        this.target_bar = this.add.curve(bounds.centerX, bounds.centerY, curve);
+        this.target_bar.setStrokeStyle(60, 0xff0000);
+
         this.timer = this.time.addEvent({
             delay: 50,
             callback: this.updateTimer,
@@ -128,6 +139,7 @@ class GameScreen extends Phaser.Scene{
             this.main_bar.destroy();
 
         var bar_path = [];
+        let bounds = new Phaser.Geom.Rectangle;
         let cur_pos = Math.floor(this.cur_position);
         if(cur_pos > 0)
         {
@@ -136,34 +148,34 @@ class GameScreen extends Phaser.Scene{
                 bar_path.push(this.path[i]);
             }
             let curve = new Phaser.Curves.Spline(bar_path);
-    
-            this.main_bar = this.add.curve(bar_path[0].x, bar_path[0].y, curve).setOrigin(0,0);
+            curve.getBounds(bounds);
+            this.main_bar = this.add.curve(bounds.centerX, bounds.centerY, curve);
     
             this.main_bar.setStrokeStyle(40, 0xffffff);
         }
     
         // this.graphics.clear();
-        // this.graphics.lineStyle(70, 0xFF0000, 1);
-        // for(let i=target_position-target_width-1; i<target_position+target_width; i++)
+        // this.graphics.lineStyle(100, 0xFFFF00, 1);
+        // this.graphics.beginPath();
+        // this.graphics.moveTo(this.path[target_position-target_width-1].x, this.path[target_position-target_width-1].y);
+        // for(let i=target_position-target_width; i<target_position+target_width; i++)
         // {
-        //     this.graphics.beginPath();
-        //     this.graphics.moveTo(this.path[i-1].x, this.path[i-1].y);
         //     this.graphics.lineTo(this.path[i].x, this.path[i].y);
-        //     this.graphics.closePath();
-        //     this.graphics.strokePath();
         // }
+        // this.graphics.closePath();
+        // this.graphics.strokePath();
 
         // this.graphics.lineStyle(50, 0xFFFFFF, 1.0);
         // let cur_pos = Math.floor(this.cur_position);
+        // this.graphics.beginPath();
+        // this.graphics.moveTo(this.path[0].x, this.path[0].y);
         // for(let i=1; i<cur_pos; i++)
         // {
-        //     this.graphics.beginPath();
-        //     this.graphics.moveTo(this.path[i-1].x, this.path[i-1].y);
         //     this.graphics.lineTo(this.path[i].x, this.path[i].y);
-        //     this.graphics.closePath();
-        //     this.graphics.strokePath();
         // }
-    }
+        // this.graphics.closePath();
+        // this.graphics.strokePath();
+}
 
     checkResult(){
         this.timer.remove();
@@ -183,8 +195,9 @@ class GameScreen extends Phaser.Scene{
         }
 
         if(userData.heart>0){
-            if(level == 50)
+            if(bPass && level == 50)
             {
+                level++;
                 game.scene.stop('GameScreen');
                 game.scene.start('EndScreen');
                 return;
