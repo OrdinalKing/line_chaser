@@ -83,7 +83,8 @@ class HomeScreen extends Phaser.Scene{
         this.play.setInteractive().on('pointerdown', () => {
 
             target_width = 20;
-            target_position = Math.floor(Math.random() * 280) + 40;
+            // target_position = Math.floor(Math.random() * 280) + 40;
+            target_position = 320;
             path_index = 0;
             level = 1;
 
