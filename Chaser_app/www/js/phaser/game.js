@@ -26,7 +26,100 @@ class GameScreen extends Phaser.Scene{
     }
 
     create() {
-        this.pointText = this.add.text(540, 700, level, { fixedWidth: 900, fixedHeight: 400 })
+        this.particle_type = undefined;
+        if(level>10)
+        {
+            this.particle_type = Number.parseInt(Math.random()*5);
+            this.particles = this.add.particles('flares');
+            if(this.particle_type == 0)
+            {
+                //  Any particles that leave this shape will be killed instantly
+                this.particle_circle = new Phaser.Geom.Circle(540, 1200, 450);
+                this.particles.createEmitter({
+                    frame: [ 'red', 'green', 'blue' ],
+                    x: 540,
+                    y: 1200,
+                    speed: 300,
+                    lifespan: 4000,
+                    scale: 0.4,
+                    blendMode: 'ADD',
+                    deathZone: { type: 'onLeave', source: this.circle }
+                });
+            } else if(this.particle_type == 1){
+                this.particles.createEmitter({
+                    frame: { frames: [ 'red', 'blue', 'green', 'yellow' ], cycle: true },
+                    x: 540,
+                    y: { start: 600, end: 1800, steps: 32 },
+                    lifespan: 2000,
+                    accelerationX: 300,
+                    scale: 0.5,
+                    blendMode: 'ADD'
+                });
+            
+                this.particles.createEmitter({
+                    frame: { frames: [ 'red', 'blue', 'green', 'yellow' ], cycle: true },
+                    x: 540,
+                    y: { start: 1800, end: 600, steps: 32 },
+                    lifespan: 2000,
+                    accelerationX: -300,
+                    scale: 0.5,
+                    blendMode: 'ADD'
+                });
+            
+            } else if(this.particle_type == 2){
+                this.particle_line = new Phaser.Geom.Line(-450, -450, 450, 450);
+            
+                this.particles.createEmitter({
+                    frame: [ 'red', 'green', 'yellow', 'blue' ],
+                    x: 540, y: 1200,
+                    scale: { start: 0.2, end: 0 },
+                    alpha: { start: 1, end: 0, ease: 'Quartic.easeOut' },
+                    speed: { min: -20, max: 20 },
+                    quantity: 32,
+                    emitZone: { source: this.particle_line },
+                    blendMode: 'SCREEN'
+                });
+            } else if(this.particle_type == 3){
+                this.particles.createEmitter({
+                    frame: 'blue',
+                    x: -100,
+                    y: 0,
+                    lifespan: 2000,
+                    speed: { min: 400, max: 600 },
+                    angle: 330,
+                    gravityY: 300,
+                    scale: { start: 0.4, end: 0 },
+                    quantity: 2,
+                    blendMode: 'ADD'
+                });
+            
+                this.particles.createEmitter({
+                    frame: 'red',
+                    x: 100,
+                    y: 0,
+                    lifespan: 2000,
+                    speed: { min: 400, max: 600 },
+                    angle: 330,
+                    gravityY: 300,
+                    scale: { start: 0.4, end: 0 },
+                    quantity: 2,
+                    blendMode: 'ADD'
+                });
+            
+                this.particles.setPosition(540, 1200);
+            
+            } else if( this.particle_type == 4){
+                var path = new Phaser.Curves.Path(540, 1200).circleTo(250).moveTo(540, 1200).circleTo(250, true, 180);
+                this.particles.createEmitter({
+                    frame: { frames: [ 'red', 'green', 'blue' ], cycle: true },
+                    scale: { start: 2, end: 0 },
+                    blendMode: 'ADD',
+                    emitZone: { type: 'edge', source: path, quantity: 48, yoyo: false }
+                });
+            }
+        }
+
+        this.levelText = this.add.text(540, 700, level, { fixedWidth: 900, fixedHeight: 400 })
         .setStyle({
             fontSize: '400px',
             fontFamily: 'RR',
@@ -35,25 +128,6 @@ class GameScreen extends Phaser.Scene{
             color: '#ffff0080',
         })
         .setOrigin(0.5,0.5);
-
-        if(level>10)
-        {
-            //  Any particles that leave this shape will be killed instantly
-            var circle = new Phaser.Geom.Circle(540, 1200, 450);
-
-            var particles = this.add.particles('flares');
-
-            particles.createEmitter({
-                frame: [ 'red', 'green', 'blue' ],
-                x: 540,
-                y: 1200,
-                speed: 300,
-                lifespan: 4000,
-                scale: 0.4,
-                blendMode: 'ADD',
-                deathZone: { type: 'onLeave', source: circle }
-            });
-        }
 
         this.panel = this.add.image(540,200,'Panel');
         this.avatar = this.add.image(165,200,'Avatar').setScale(0.5);
@@ -106,7 +180,7 @@ class GameScreen extends Phaser.Scene{
         this.counter = 0;
         this.direction = 1;
         this.turn = false;
-        this.speed = 5 + Math.sqrt(level);
+        this.speed = 5 + Math.sqrt(level*2);
         this.cur_position = 0.0;
         this.path = bar_path_sample[path_index];
 
@@ -146,6 +220,15 @@ class GameScreen extends Phaser.Scene{
         });
     }
     update(){
+        if(this.particle_type != undefined)
+        {
+            if(this.particle_type == 2){
+                Phaser.Geom.Line.Rotate(this.particle_line, 0.03);
+            }
+            else if(this.particle_type == 3){
+                this.particles.rotation -= 0.01;
+            }
+        }
         if(this.main_bar)
             this.main_bar.destroy();
 
@@ -215,13 +298,12 @@ class GameScreen extends Phaser.Scene{
             }
             if(bPass)
                 level++;
+            if(level>5){
+                target_position = Math.floor(Math.random() * 280) + 40;
+            }
             if(level>20)
             {
                 path_index = (level - 20);
-            }
-            if(level>30)
-            {
-                target_position = Math.floor(Math.random() * 280) + 40;
             }
             if(level>40){
                 target_width = 20-(level-40);
