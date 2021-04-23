@@ -26,9 +26,9 @@ class GameScreen extends Phaser.Scene{
     }
 
     create() {
-        this.pointText = this.add.text(540, 1195, level, { fixedWidth: 900, fixedHeight: 800 })
+        this.pointText = this.add.text(540, 700, level, { fixedWidth: 900, fixedHeight: 400 })
         .setStyle({
-            fontSize: '600px',
+            fontSize: '400px',
             fontFamily: 'RR',
             fontWeight: 'bold',
             align: "center",
