@@ -18,6 +18,7 @@ class GameScreen extends Phaser.Scene{
         this.load.image("Avatar", "./images/avatar/" + userData.avatar + ".png");
         this.load.image("Panel", "./images/user_panel.png");
         this.load.image("Board", "./images/game_board.png");
+        this.load.image("Cross", "./images/cross.png");
         this.load.image("Heart", "./images/heart.png");
         this.load.image("Coin", "./images/coin.png");
         this.load.image("Point", "./images/point.png");
@@ -25,6 +26,16 @@ class GameScreen extends Phaser.Scene{
     }
 
     create() {
+        this.pointText = this.add.text(540, 1195, level, { fixedWidth: 900, fixedHeight: 800 })
+        .setStyle({
+            fontSize: '600px',
+            fontFamily: 'RR',
+            fontWeight: 'bold',
+            align: "center",
+            color: '#ffff0080',
+        })
+        .setOrigin(0.5,0.5);
+
         if(level>10)
         {
             //  Any particles that leave this shape will be killed instantly
@@ -215,13 +226,31 @@ class GameScreen extends Phaser.Scene{
             if(level>40){
                 target_width = 20-(level-40);
             }
+        }
+        if(!bPass){
+            this.board.disableInteractive();
+            this.cross = this.add.image(540,1195,'Cross');
+            this.timer = this.time.addEvent({
+                delay: 1000,
+                callback: this.lostProcess,
+                args: [this],
+                loop: false
+            });
+        }
+        else{
             this.scene.restart();
         }
+    }
+
+    lostProcess(scene){
+        if(userData.heart > 0)
+            scene.scene.restart();
         else{
             game.scene.stop('GameScreen');
             game.scene.start('EndScreen');
         }
     }
+
     updateTimer(scene){
         scene.counter = (scene.counter+1)%10;
         if(scene.cur_position >= 340)
