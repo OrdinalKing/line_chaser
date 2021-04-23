@@ -87,21 +87,21 @@ class HomeScreen extends Phaser.Scene{
             path_index = 0;
             level = 1;
 
-            //For Test
-            level = 45;
-            userData.heart = 50;
-            if(level>20)
-            {
-                path_index = (level - 20);
-            }
-            if(level>30)
-            {
-                target_position = Math.floor(Math.random() * 280) + 40;
-            }
-            if(level>40){
-                target_width = 20-(level-40);
-            }
-            //Test End
+            // //For Test
+            // level = 45;
+            // userData.heart = 50;
+            // if(level>20)
+            // {
+            //     path_index = (level - 20);
+            // }
+            // if(level>30)
+            // {
+            //     target_position = Math.floor(Math.random() * 280) + 40;
+            // }
+            // if(level>40){
+            //     target_width = 20-(level-40);
+            // }
+            // //Test End
             game.domContainer.style.display = 'block';
 
             game.scene.stop('HomeScreen');
