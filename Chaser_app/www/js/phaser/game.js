@@ -124,27 +124,45 @@ class GameScreen extends Phaser.Scene{
         });
     }
     update(){
-        this.graphics.clear();
-        this.graphics.lineStyle(70, 0xFF0000, 1);
-        for(let i=target_position-target_width-1; i<target_position+target_width; i++)
-        {
-            this.graphics.beginPath();
-            this.graphics.moveTo(this.path[i-1].x, this.path[i-1].y);
-            this.graphics.lineTo(this.path[i].x, this.path[i].y);
-            this.graphics.closePath();
-            this.graphics.strokePath();
-        }
+        if(this.main_bar)
+            this.main_bar.destroy();
 
-        this.graphics.lineStyle(50, 0xFFFFFF, 1.0);
+        var bar_path = [];
         let cur_pos = Math.floor(this.cur_position);
-        for(let i=1; i<cur_pos; i++)
+        if(cur_pos > 0)
         {
-            this.graphics.beginPath();
-            this.graphics.moveTo(this.path[i-1].x, this.path[i-1].y);
-            this.graphics.lineTo(this.path[i].x, this.path[i].y);
-            this.graphics.closePath();
-            this.graphics.strokePath();
+            for(let i=0; i<cur_pos; i++)
+            {
+                bar_path.push(this.path[i]);
+            }
+            let curve = new Phaser.Curves.Spline(bar_path);
+    
+            this.main_bar = this.add.curve(bar_path[0].x, bar_path[0].y, curve).setOrigin(0,0);
+    
+            this.main_bar.setStrokeStyle(40, 0xffffff);
         }
+    
+        // this.graphics.clear();
+        // this.graphics.lineStyle(70, 0xFF0000, 1);
+        // for(let i=target_position-target_width-1; i<target_position+target_width; i++)
+        // {
+        //     this.graphics.beginPath();
+        //     this.graphics.moveTo(this.path[i-1].x, this.path[i-1].y);
+        //     this.graphics.lineTo(this.path[i].x, this.path[i].y);
+        //     this.graphics.closePath();
+        //     this.graphics.strokePath();
+        // }
+
+        // this.graphics.lineStyle(50, 0xFFFFFF, 1.0);
+        // let cur_pos = Math.floor(this.cur_position);
+        // for(let i=1; i<cur_pos; i++)
+        // {
+        //     this.graphics.beginPath();
+        //     this.graphics.moveTo(this.path[i-1].x, this.path[i-1].y);
+        //     this.graphics.lineTo(this.path[i].x, this.path[i].y);
+        //     this.graphics.closePath();
+        //     this.graphics.strokePath();
+        // }
     }
 
     checkResult(){
