@@ -86,8 +86,8 @@ class SettingScreen extends Phaser.Scene{
             //     autoShow:false,
             //     isTesting: true,
             // });
-            userData.heart = (Number.parseInt(userData.heart) + 1) > 3 ? 3 : (Number.parseInt(userData.heart) + 1);
-            Client.level_end(1, 0, 0);
+            userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
+            Client.level_end(3, 0, 0);
             for(let i=0; i<3; i++)
             {
                 if(i+1 > userData.heart)

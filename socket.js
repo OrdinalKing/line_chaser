@@ -10,8 +10,8 @@ const exportedMethods = {
             result.map((user, index) => {
                 var date = new Date();
                 var hour = date.getHours();
-                if (user.heart < 3 && (user.revive>hour || (hour-user.revive) >5)) {
-                    const info = users.addUserValue(user.username, { heart: 1 });
+                if (user.heart < 3 && (user.revive>hour || (hour-user.revive) >1)) {
+                    const info = users.addUserValue(user.username, { heart: 3 });
                     if (!info) console.log('Error occured whild addHeart');
                     else{
                         if(players[user.username])

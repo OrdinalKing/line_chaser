@@ -1,0 +1,40 @@
+Thumb hero update
+
+/////1. After 50 levels can you randomise levels to infinite still increasing speed each level.
+
+/////2.Make bar smoother looking and smoother moving in higher levels 
+
+/////3.Refresh lifes after 2 hours. 
+
+/////4.Watching 1 advert gives back all 3 lifes
+
+5.Make a difference distraction for each level up to level 50
+
+6.Rename game to thumb hero
+
+/////7.Make a how to play screen (explain rules)
+
+8.Avatars
+
+9.Change background and remove white border line 
+Change the look of the line
+
+10.Add a reset ranks button to admin
+
+Post to facebook button
+
+Want to add a second ranked table. But let's discuss 
+Want to add a feature I will pay extra for.
+
+Help buttons
+
+Simplify
+Slow down
+Remove particles
+
+Donate button
+
+Disclamier moving elements and flashing imagery 
+
+
+Rank is based on players on the highest level. If more then one player is on the same level then fastest time.

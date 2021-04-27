@@ -220,6 +220,22 @@ class GameScreen extends Phaser.Scene{
         });
     }
     update(){
+        if(level == 1)
+        {
+            if(this.guide)
+                this.guide.destroy();
+            if(Math.abs(this.cur_position-target_position) <= target_width)
+            {
+                this.guide = this.add.text(540, 1500, "Tap!!!")
+                .setStyle({
+                    fontSize: '120px',
+                    fontFamily: 'RR',
+                    fontWeight: 'bold',
+                    align: "center",
+                    color: '#ffff00',
+                }).setOrigin(0.5,0.5);
+            }
+        }
         if(this.particle_type != undefined)
         {
             if(this.particle_type == 2){
@@ -244,7 +260,10 @@ class GameScreen extends Phaser.Scene{
             let curve = new Phaser.Curves.Spline(bar_path);
             curve.getBounds(bounds);
             this.main_bar = this.add.curve(bounds.centerX, bounds.centerY, curve);
-    
+            // if(level > 20)
+                this.main_bar.setSmoothness(100);
+            // else if(level > 35)
+            //     this.main_bar.setSmoothness(1500);
             this.main_bar.setStrokeStyle(40, 0xffffff);
         }
     
@@ -289,13 +308,6 @@ class GameScreen extends Phaser.Scene{
         }
 
         if(userData.heart>0){
-            if(bPass && level == 50)
-            {
-                level++;
-                game.scene.stop('GameScreen');
-                game.scene.start('EndScreen');
-                return;
-            }
             if(bPass)
                 level++;
             if(level>5){
@@ -303,10 +315,18 @@ class GameScreen extends Phaser.Scene{
             }
             if(level>20)
             {
-                path_index = (level - 20);
+                if(level<=50){
+                    path_index = (level - 20);
+                }
+                else{
+                    path_index = Math.floor(Math.random() * 31);
+                }
             }
             if(level>40){
-                target_width = 20-(level-40);
+                if(level>50)
+                    target_width = 10;
+                else
+                    target_width = 20-(level-40);
             }
         }
         if(!bPass){
