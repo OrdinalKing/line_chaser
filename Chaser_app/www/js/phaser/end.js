@@ -74,7 +74,7 @@ class EndScreen extends Phaser.Scene{
 
         if(level>50)
         {
-            this.resultText = this.add.text(540, 1000, 'Congratulations!\nYou have completed 50 levels.', { fixedWidth: 1000, fixedHeight: 200 })
+            this.resultText = this.add.text(540, 1000, 'Congratulations!\nYou have completed ' + (level-1) + ' levels.', { fixedWidth: 1000, fixedHeight: 200 })
             .setStyle({
                 fontSize: '76px',
                 fontFamily: 'RR',
@@ -118,8 +118,8 @@ class EndScreen extends Phaser.Scene{
                 //     autoShow:false,
                 //     isTesting: true,
                 // });
-                userData.heart = (Number.parseInt(userData.heart) + 1) > 3 ? 3 : (Number.parseInt(userData.heart) + 1);
-                Client.level_end(1, 0, 0);
+                userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
+                Client.level_end(3, 0, 0);
                 for(let i=0; i<3; i++)
                 {
                     if(i+1 > userData.heart)
