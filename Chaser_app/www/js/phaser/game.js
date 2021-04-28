@@ -218,14 +218,27 @@ class GameScreen extends Phaser.Scene{
             args: [this],
             loop: true
         });
+
+        if(level == 1){
+            this.guideText = this.add.text(540, 1000, "Wait for the line to\ngo in to the red box")
+            .setStyle({
+                fontSize: '80px',
+                fontFamily: 'RR',
+                fontWeight: 'bold',
+                align: "center",
+                color: '#ffffff',
+            }).setOrigin(0.5,0.5);
+        }
     }
     update(){
         if(level == 1)
         {
             if(this.guide)
                 this.guide.destroy();
-            if(Math.abs(this.cur_position-target_position) <= target_width)
+            if(Math.abs(this.cur_position-target_position) <= target_width-5)
             {
+                this.timer.remove();
+                this.time.removeEvent(this.timer);
                 this.guide = this.add.text(540, 1500, "Tap!!!")
                 .setStyle({
                     fontSize: '120px',
