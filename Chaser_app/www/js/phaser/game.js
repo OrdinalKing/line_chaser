@@ -29,6 +29,7 @@ class GameScreen extends Phaser.Scene{
         this.particle_type = undefined;
         if(level>10)
         {
+            $('body').css('background-image', 'url(../../images/background/' + (1+ Math.floor(Math.random()*4)) + '.jpg)');
             this.particle_type = Number.parseInt(Math.random()*5);
             this.particles = this.add.particles('flares');
             if(this.particle_type == 0)
@@ -361,6 +362,7 @@ class GameScreen extends Phaser.Scene{
         if(userData.heart > 0)
             scene.scene.restart();
         else{
+            $('body').css('background-image', '');
             game.scene.stop('GameScreen');
             game.scene.start('EndScreen');
         }
