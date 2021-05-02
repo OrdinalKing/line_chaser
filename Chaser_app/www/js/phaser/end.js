@@ -11,19 +11,6 @@ class EndScreen extends Phaser.Scene{
     preload() {
         this.textures.remove('Avatar');
         this.load.image("Avatar", "./images/avatar/" + userData.avatar + ".png");
-        this.load.image("Panel", "./images/user_panel.png");
-        this.load.image("Board", "./images/game_board.png");
-        this.load.image("Heart", "./images/heart.png");
-        this.load.image("Coin", "./images/coin.png");
-        this.load.image("Point", "./images/point.png");
-        this.load.image("MainPage", "./images/main_page.png");
-
-        if(level <= 50){
-            this.load.image("PlayAgain", "./images/play_again.png");
-            this.load.image("PurchaseCoin", "./images/purchase_coin.png");
-            this.load.image("ReviveAdmob", "./images/revive_admob.png");
-            this.load.image("ReviveCoin", "./images/revive_coin.png");
-        }
     }
 
     create() {

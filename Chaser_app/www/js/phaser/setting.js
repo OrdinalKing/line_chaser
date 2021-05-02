@@ -11,16 +11,6 @@ class SettingScreen extends Phaser.Scene{
     preload() {
         this.textures.remove('Avatar');
         this.load.image("Avatar", "./images/avatar/" + userData.avatar + ".png");
-        this.load.image("Panel", "./images/user_panel.png");
-        this.load.image("Board", "./images/game_board.png");
-        this.load.image("Heart", "./images/heart.png");
-        this.load.image("Coin", "./images/coin.png");
-        this.load.image("Point", "./images/point.png");
-        this.load.image("MainPage", "./images/main_page.png");
-        this.load.image("PurchaseCoin", "./images/purchase_coin.png");
-        this.load.image("Purchase", "./images/purchase.png");
-        this.load.image("ReviveAdmob", "./images/revive_admob.png");
-        this.load.image("ReviveCoin", "./images/revive_coin.png");
 
         this.load.scenePlugin({
             key: 'rexuiplugin',
@@ -28,9 +18,6 @@ class SettingScreen extends Phaser.Scene{
             sceneKey: 'rexUI'
         });
 
-        for(let i=0; i<10; i++){
-            this.load.image("Avatar_" + i, "./images/avatar/" + i + ".png");
-        }
     }
 
     create() {
