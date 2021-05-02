@@ -17,10 +17,6 @@ class StripeScreen extends Phaser.Scene{
 
         this.load.plugin('rextexteditplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js', true);
         this.load.plugin('rexinputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js', true);
-
-
-        this.load.image("Purchase", "./images/purchase.png");
-        this.load.image("Back", "./images/back.png");
     }
 
     create() {

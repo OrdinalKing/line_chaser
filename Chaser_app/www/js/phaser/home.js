@@ -11,27 +11,12 @@ class HomeScreen extends Phaser.Scene{
     preload() {
         this.textures.remove('Avatar');
         this.load.image("Avatar", "./images/avatar/" + userData.avatar + ".png");
-        this.load.image("Panel", "./images/user_panel.png");
-        this.load.image("Board", "./images/game_board.png");
-        this.load.image("Heart", "./images/heart.png");
-        this.load.image("Coin", "./images/coin.png");
-        this.load.image("Point", "./images/point.png");
-        this.load.image("Play", "./images/play.png");
-        this.load.image("Setting", "./images/setting.png");
 
         this.load.scenePlugin({
             key: 'rexuiplugin',
             url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
             sceneKey: 'rexUI'
         });
-
-        // this.load.plugin('rextexteditplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js', true);
-        // if(userData.avatar != "")
-        // {
-        //     if(this.textures.exists('user_avatar'))
-        //         this.textures.remove('user_avatar');
-        //     this.textures.addBase64('user_avatar', userData.avatar);
-        // }
     }
 
     create() {

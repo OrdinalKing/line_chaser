@@ -17,12 +17,6 @@ class RegisterScreen extends Phaser.Scene{
 
         this.load.plugin('rextexteditplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js', true);
         this.load.plugin('rexinputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js', true);
-
-
-        this.load.image("Logo", "./images/logo.png");
-        this.load.image("Login", "./images/login.png");
-        this.load.image("SignUp", "./images/signup.png");
-        this.load.image("InputBack", "./images/input_back.png");
     }
 
     create() {

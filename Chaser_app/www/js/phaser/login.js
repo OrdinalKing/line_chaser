@@ -22,11 +22,31 @@ class LoginScreen extends Phaser.Scene{
         this.load.plugin('rextexteditplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js', true);
         this.load.plugin('rexinputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js', true);
 
-
         this.load.image("Logo", "./images/logo.png");
         this.load.image("Login", "./images/login.png");
         this.load.image("SignUp", "./images/signup.png");
         this.load.image("InputBack", "./images/input_back.png");
+        this.load.image("Panel", "./images/user_panel.png");
+        this.load.image("Board", "./images/game_board.png");
+        this.load.image("Heart", "./images/heart.png");
+        this.load.image("Coin", "./images/coin.png");
+        this.load.image("Point", "./images/point.png");
+        this.load.image("Play", "./images/play.png");
+        this.load.image("Setting", "./images/setting.png");
+        this.load.atlas('flares', './images/particles/flares.png', './images/particles/flares.json');
+        this.load.image("Cross", "./images/cross.png");
+        this.load.image('triangle', './images/particles/triangle.png');
+        this.load.image("MainPage", "./images/main_page.png");
+        this.load.image("PurchaseCoin", "./images/purchase_coin.png");
+        this.load.image("Purchase", "./images/purchase.png");
+        this.load.image("ReviveAdmob", "./images/revive_admob.png");
+        this.load.image("ReviveCoin", "./images/revive_coin.png");
+        this.load.image("Back", "./images/back.png");
+        this.load.image("PlayAgain", "./images/play_again.png");
+
+        for(let i=0; i<10; i++){
+            this.load.image("Avatar_" + i, "./images/avatar/" + i + ".png");
+        }
     }
 
     create() {
