@@ -23,11 +23,19 @@ class GameScreen extends Phaser.Scene{
         this.load.image("Coin", "./images/coin.png");
         this.load.image("Point", "./images/point.png");
         // this.load.spritesheet("Multi", "./images/sign_multi.png", { frameWidth: 190, frameHeight: 178 });
+        this.load.image('triangle', './images/particles/triangle.png');
     }
 
     create() {
         this.particle_type = undefined;
-        if(level>10)
+        if(level<=10){
+            this.triangle = this.add.image(540, 1000, 'triangle');
+            this.vectorX = Math.random()*30-15;
+            this.vectorY = Math.random()*30-15;
+            this.angle = Math.random()*20-10;
+            this.scale = 1 + Math.random()*0.1 - 0.05;
+        }
+        else if(level>10)
         {
             $('body').css('background-image', 'url(../../images/background/' + (1+ Math.floor(Math.random()*4)) + '.jpg)');
             this.particle_type = Number.parseInt(Math.random()*5);
@@ -232,6 +240,36 @@ class GameScreen extends Phaser.Scene{
         }
     }
     update(){
+        if(level<=10){
+            if(Math.random() < 0.05){
+                this.vectorX = Math.random()*30-15;
+                this.vectorY = Math.random()*30-15;
+            }
+            if(Math.random() < 0.05){
+                this.angle = Math.random()*20-10;
+            }
+            if(Math.random() < 0.05){
+                this.scale = this.scale + Math.random()*0.2 - 0.1;
+                if(this.scale > 3)
+                    this.scale = 3;
+                else if(this.scale < 0.5)
+                    this.scale = 0.5;
+            }
+            let x = this.triangle.x+this.vectorX;
+            let y = this.triangle.y+this.vectorY;
+            if(x>800)
+                x = 800;
+            else if(x<200)
+                x = 200;
+            if(y>1400)
+                y = 1400;
+            else if(y<800)
+                y = 800;
+            this.triangle.setPosition(x,y);
+            this.triangle.setScale(this.scale);
+            this.triangle.setAngle(this.triangle.angle + this.angle);
+        }
+
         if(level == 1)
         {
             if(this.guide)

@@ -83,16 +83,6 @@ class EndScreen extends Phaser.Scene{
                 fill: '#fa5c00',
             })
             .setOrigin(0.5,0.5);
-            this.resultText.stroke = "#f0fafe";
-            this.resultText.strokeThickness = 32;
-            //  Apply the shadow to the Stroke and the Fill (this is the default)
-            this.resultText.setShadow(10, 10, "#333333", 10, true, true);
-
-            this.mainButton = this.add.image(540,1500,'MainPage');
-            this.mainButton.setInteractive().on('pointerdown', () => {
-                game.scene.stop('EndScreen');
-                game.scene.start('HomeScreen');
-            });
         }
         else
         {
@@ -105,72 +95,72 @@ class EndScreen extends Phaser.Scene{
                 fill: '#963700',
             })
             .setOrigin(0.5,0.5);
-            this.resultText.stroke = "#f0fafe";
-            this.resultText.strokeThickness = 32;
-            //  Apply the shadow to the Stroke and the Fill (this is the default)
-            this.resultText.setShadow(10, 10, "#333333", 10, true, true);
+        }
 
-            this.admobButton = this.add.image(540,1000,'ReviveAdmob');
-            this.admobButton.setInteractive().on('pointerdown', () => {
-                // AdMob.showInterstitial();
-                // AdMob.prepareInterstitial({
-                //     adId: admobid.interstitial,
-                //     autoShow:false,
-                //     isTesting: true,
-                // });
-                userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
-                Client.level_end(3, 0, 0);
-                for(let i=0; i<3; i++)
-                {
-                    if(i+1 > userData.heart)
-                        this.hearts[i].setVisible(false);
-                    else
-                        this.hearts[i].setVisible(true);
-                }
-                this.againButton.setAlpha(1.0);
-                this.againButton.setInteractive();
-            });
-            this.coinButton = this.add.image(540,1200,'ReviveCoin');
-            this.coinButton.setInteractive().on('pointerdown', () => {
-                userData.coin = Number.parseInt(userData.coin) - 1000;
-                Client.level_end(0, -1000, 0);
-                for(let i=0; i<3; i++)
-                {
-                    if(i+1 > userData.heart)
-                        this.hearts[i].setVisible(false);
-                    else
-                        this.hearts[i].setVisible(true);
-                }
-                this.coinText.setText(userData.coin);
-                this.againButton.setAlpha(1.0);
-                this.againButton.setInteractive();
-                if(Number.parseInt(userData.coin)<1000){
-                    this.coinButton.disableInteractive();
-                    this.coinButton.setAlpha(0.5);
-                }
-            });
+        this.resultText.stroke = "#f0fafe";
+        this.resultText.strokeThickness = 32;
+        //  Apply the shadow to the Stroke and the Fill (this is the default)
+        this.resultText.setShadow(10, 10, "#333333", 10, true, true);
+
+        this.admobButton = this.add.image(540,1000,'ReviveAdmob');
+        this.admobButton.setInteractive().on('pointerdown', () => {
+            // AdMob.showInterstitial();
+            // AdMob.prepareInterstitial({
+            //     adId: admobid.interstitial,
+            //     autoShow:false,
+            //     isTesting: true,
+            // });
+            userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
+            Client.level_end(3, 0, 0);
+            for(let i=0; i<3; i++)
+            {
+                if(i+1 > userData.heart)
+                    this.hearts[i].setVisible(false);
+                else
+                    this.hearts[i].setVisible(true);
+            }
+            this.againButton.setAlpha(1.0);
+            this.againButton.setInteractive();
+        });
+        this.coinButton = this.add.image(540,1200,'ReviveCoin');
+        this.coinButton.setInteractive().on('pointerdown', () => {
+            userData.coin = Number.parseInt(userData.coin) - 1000;
+            Client.level_end(0, -1000, 0);
+            for(let i=0; i<3; i++)
+            {
+                if(i+1 > userData.heart)
+                    this.hearts[i].setVisible(false);
+                else
+                    this.hearts[i].setVisible(true);
+            }
+            this.coinText.setText(userData.coin);
+            this.againButton.setAlpha(1.0);
+            this.againButton.setInteractive();
             if(Number.parseInt(userData.coin)<1000){
                 this.coinButton.disableInteractive();
                 this.coinButton.setAlpha(0.5);
             }
-            this.purchaseButton = this.add.image(540,1400,'PurchaseCoin');
-            this.purchaseButton.setInteractive().on('pointerdown', () => {
-                game.scene.stop('EndScreen');
-                game.scene.start('StripeScreen');
-            });
-            this.againButton = this.add.image(540,1600,'PlayAgain');
-            this.againButton.disableInteractive().on('pointerdown', () => {
-                game.scene.stop('EndScreen');
-                game.scene.start('GameScreen');
-            });
-            this.againButton.setAlpha(0.5);
-            this.mainButton = this.add.image(540,1800,'MainPage');
-            this.mainButton.setInteractive().on('pointerdown', () => {
-                game.scene.stop('EndScreen');
-                game.scene.start('HomeScreen');
-            });
+        });
+        if(Number.parseInt(userData.coin)<1000){
+            this.coinButton.disableInteractive();
+            this.coinButton.setAlpha(0.5);
         }
-
+        this.purchaseButton = this.add.image(540,1400,'PurchaseCoin');
+        this.purchaseButton.setInteractive().on('pointerdown', () => {
+            game.scene.stop('EndScreen');
+            game.scene.start('StripeScreen');
+        });
+        this.againButton = this.add.image(540,1600,'PlayAgain');
+        this.againButton.disableInteractive().on('pointerdown', () => {
+            game.scene.stop('EndScreen');
+            game.scene.start('GameScreen');
+        });
+        this.againButton.setAlpha(0.5);
+        this.mainButton = this.add.image(540,1800,'MainPage');
+        this.mainButton.setInteractive().on('pointerdown', () => {
+            game.scene.stop('EndScreen');
+            game.scene.start('HomeScreen');
+        });
     }
 
     update(){
