@@ -47,6 +47,12 @@ class LoginScreen extends Phaser.Scene{
         for(let i=0; i<10; i++){
             this.load.image("Avatar_" + i, "./images/avatar/" + i + ".png");
         }
+
+        this.load.audio('bonus', './assets/audio/bonus.wav');
+        this.load.audio('coin', './assets/audio/coin.wav');
+        this.load.audio('completion', './assets/audio/completion.wav');
+        this.load.audio('level_music', './assets/audio/level_music.wav');
+        this.load.audio('revive', './assets/audio/revive.wav');
     }
 
     create() {
