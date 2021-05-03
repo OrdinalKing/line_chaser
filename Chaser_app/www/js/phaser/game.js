@@ -15,6 +15,9 @@ class GameScreen extends Phaser.Scene{
     }
 
     create() {
+        this.completion_audio = this.sound.add('completion');
+        this.background_audio = this.sound.add('level_music', {loop: true});
+
         this.levelText = this.add.text(540, 700, level, { fixedWidth: 900, fixedHeight: 400 })
         .setStyle({
             fontSize: '400px',
@@ -81,6 +84,7 @@ class GameScreen extends Phaser.Scene{
             align: "center",
             color: '#ffffff',
         }).setOrigin(0.5,0.5);
+        this.background_audio.play();
 
         this.initLevel();
     }
@@ -362,6 +366,7 @@ class GameScreen extends Phaser.Scene{
             });
         }
         else{
+            this.completion_audio.play();
             this.initLevel();
         }
     }
@@ -371,6 +376,7 @@ class GameScreen extends Phaser.Scene{
             scene.initLevel();
         else{
             $('body').css('background-image', '');
+            scene.sound.removeAll();
             game.scene.stop('GameScreen');
             game.scene.start('EndScreen');
         }

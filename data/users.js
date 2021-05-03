@@ -94,7 +94,7 @@ const exportedMethods = {
 
         if (data.point) updateduserData.point = Number.parseInt(updateduserData.point) + data.point;
         if (data.coin) updateduserData.coin = Number.parseInt(updateduserData.coin) + data.coin;
-        if (data.heart)
+        if (data.heart!=0)
         {
             updateduserData.heart += data.heart;
             var date = new Date();
