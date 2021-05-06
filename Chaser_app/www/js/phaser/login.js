@@ -53,6 +53,7 @@ class LoginScreen extends Phaser.Scene{
         this.load.audio('completion', './assets/audio/completion.wav');
         this.load.audio('level_music', './assets/audio/level_music.wav');
         this.load.audio('revive', './assets/audio/revive.wav');
+        this.load.audio('fail', './assets/audio/fail.wav');
     }
 
     create() {
