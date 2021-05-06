@@ -159,8 +159,8 @@ class GameScreen extends Phaser.Scene{
             let curve = new Phaser.Curves.Spline(bar_path);
             curve.getBounds(bounds);
             this.main_bar = this.add.curve(bounds.centerX, bounds.centerY, curve);
-            this.main_bar.setSmoothness(100);
             this.main_bar.setStrokeStyle(40, 0xffffff).setDepth(3);
+            this.main_bar.setSmoothness(50);
         }
     }
 
