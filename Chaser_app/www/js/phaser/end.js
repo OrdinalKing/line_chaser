@@ -14,6 +14,8 @@ class EndScreen extends Phaser.Scene{
     }
 
     create() {
+        this.revive_audio = this.sound.add('revive');
+
         this.panel = this.add.image(540,200,'Panel');
         this.avatar = this.add.image(165,200,'Avatar').setScale(0.5);
 
@@ -108,6 +110,7 @@ class EndScreen extends Phaser.Scene{
             }
             this.againButton.setAlpha(1.0);
             this.againButton.setInteractive();
+            this.revive_audio.play();
         });
         this.coinButton = this.add.image(540,1200,'ReviveCoin');
         this.coinButton.setInteractive().on('pointerdown', () => {
@@ -127,6 +130,7 @@ class EndScreen extends Phaser.Scene{
                 this.coinButton.disableInteractive();
                 this.coinButton.setAlpha(0.5);
             }
+            this.revive_audio.play();
         });
         if(Number.parseInt(userData.coin)<1000){
             this.coinButton.disableInteractive();

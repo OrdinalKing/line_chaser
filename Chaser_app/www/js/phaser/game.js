@@ -19,7 +19,7 @@ class GameScreen extends Phaser.Scene{
         this.background_audio = this.sound.add('level_music', {loop: true});
         this.fail_audio = this.sound.add('fail');
 
-        this.levelText = this.add.text(540, 700, level, { fixedWidth: 900, fixedHeight: 400 })
+        this.levelText = this.add.text(540, 600, level, { fixedWidth: 900, fixedHeight: 400 })
         .setStyle({
             fontSize: '400px',
             fontFamily: 'RR',
@@ -27,7 +27,7 @@ class GameScreen extends Phaser.Scene{
             align: "center",
             color: '#ffff0080',
         })
-        .setOrigin(0.5,0.5);
+        .setOrigin(0.5,0.5).setDepth(1);
 
         this.panel = this.add.image(540,200,'Panel');
         this.avatar = this.add.image(165,200,'Avatar').setScale(0.5);
@@ -86,37 +86,45 @@ class GameScreen extends Phaser.Scene{
             color: '#ffffff',
         }).setOrigin(0.5,0.5);
         this.background_audio.play();
-        this.triangle = undefined;
+        this.triangle = [];
+        this.vectorX = [];
+        this.vectorY = [];
+        this.angle = [];
+        this.scale = [];
         this.initLevel();
     }
     update(){
-        if(Math.random() < 0.05){
-            this.vectorX = Math.random()*30-15;
-            this.vectorY = Math.random()*30-15;
+        for(let index = 0; index<this.triangle.length; index++)
+        {
+            if(Math.random() < 0.05){
+                this.vectorX[index] = Math.random()*30-15;
+                this.vectorY[index] = Math.random()*30-15;
+            }
+            if(Math.random() < 0.05){
+                this.angle[index] = Math.random()*20-10;
+            }
+            if(Math.random() < 0.05){
+                this.scale[index] = this.scale[index] + Math.random()*0.2 - 0.1;
+                if(this.scale[index] > 3)
+                    this.scale[index] = 3;
+                else if(this.scale[index] < 0.5)
+                    this.scale[index] = 0.5;
+            }
+
+            let x = this.triangle[index].x+this.vectorX[index];
+            let y = this.triangle[index].y+this.vectorY[index];
+            if(x>800)
+                x = 800;
+            else if(x<200)
+                x = 200;
+            if(y>1400)
+                y = 1400;
+            else if(y<800)
+                y = 800;
+            this.triangle[index].setPosition(x,y);
+            this.triangle[index].setScale(this.scale[index]);
+            this.triangle[index].setAngle(this.triangle[index].angle + this.angle[index]);
         }
-        if(Math.random() < 0.05){
-            this.angle = Math.random()*20-10;
-        }
-        if(Math.random() < 0.05){
-            this.scale = this.scale + Math.random()*0.2 - 0.1;
-            if(this.scale > 3)
-                this.scale = 3;
-            else if(this.scale < 0.5)
-                this.scale = 0.5;
-        }
-        let x = this.triangle.x+this.vectorX;
-        let y = this.triangle.y+this.vectorY;
-        if(x>800)
-            x = 800;
-        else if(x<200)
-            x = 200;
-        if(y>1400)
-            y = 1400;
-        else if(y<800)
-            y = 800;
-        this.triangle.setPosition(x,y);
-        this.triangle.setScale(this.scale);
-        this.triangle.setAngle(this.triangle.angle + this.angle);
 
         if(level == 1)
         {
@@ -152,7 +160,7 @@ class GameScreen extends Phaser.Scene{
             curve.getBounds(bounds);
             this.main_bar = this.add.curve(bounds.centerX, bounds.centerY, curve);
             this.main_bar.setSmoothness(100);
-            this.main_bar.setStrokeStyle(40, 0xffffff);
+            this.main_bar.setStrokeStyle(40, 0xffffff).setDepth(3);
         }
     }
 
@@ -174,12 +182,25 @@ class GameScreen extends Phaser.Scene{
         this.updateUser();
         this.levelText.setText(level);
         $('body').css('background-image', 'url(../../images/background/' + (((level-1)%50) + 1) + '.jpg)');
-        if(!this.triangle){
-            this.triangle = this.add.image(540, 1000, 'triangle');
-            this.vectorX = Math.random()*30-15;
-            this.vectorY = Math.random()*30-15;
-            this.angle = Math.random()*20-10;
-            this.scale = 1 + Math.random()*0.1 - 0.05;
+        for(let distraction_index = 0; distraction_index < level; distraction_index++){
+            if(this.triangle.length < distraction_index+1)
+            {
+                let particle = "";
+                if(distraction_index % 4 == 0){
+                    particle = "triangle";
+                } else if(distraction_index % 4 == 1){
+                    particle = "rectangle";
+                } else if(distraction_index % 4 == 2){
+                    particle = "pentagon";
+                } else if(distraction_index % 4 == 3){
+                    particle = "circle";
+                }
+                this.triangle.push(this.add.image(540, 1000, particle));
+                this.vectorX.push(Math.random()*30-15);
+                this.vectorY.push(Math.random()*30-15);
+                this.angle.push(Math.random()*20-10);
+                this.scale.push(1 + Math.random()*0.1 - 0.05);
+            }
         }
 
         this.counter = 0;
@@ -202,7 +223,7 @@ class GameScreen extends Phaser.Scene{
         if(this.target_bar)
             this.target_bar.destroy();
         this.target_bar = this.add.curve(bounds.centerX, bounds.centerY, curve);
-        this.target_bar.setStrokeStyle(60, 0xff0000);
+        this.target_bar.setStrokeStyle(60, 0xff0000).setDepth(2);
 
         if(this.timer)
         {
