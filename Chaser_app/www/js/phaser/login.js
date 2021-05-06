@@ -36,6 +36,9 @@ class LoginScreen extends Phaser.Scene{
         this.load.atlas('flares', './images/particles/flares.png', './images/particles/flares.json');
         this.load.image("Cross", "./images/cross.png");
         this.load.image('triangle', './images/particles/triangle.png');
+        this.load.image('rectangle', './images/particles/rectangle.png');
+        this.load.image('pentagon', './images/particles/pentagon.png');
+        this.load.image('circle', './images/particles/circle.png');
         this.load.image("MainPage", "./images/main_page.png");
         this.load.image("PurchaseCoin", "./images/purchase_coin.png");
         this.load.image("Purchase", "./images/purchase.png");
