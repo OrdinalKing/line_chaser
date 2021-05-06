@@ -61,7 +61,7 @@ class EndScreen extends Phaser.Scene{
 
         if(level>50)
         {
-            this.resultText = this.add.text(540, 1000, 'Congratulations!\nYou have completed ' + (level-1) + ' levels.', { fixedWidth: 1000, fixedHeight: 200 })
+            this.resultText = this.add.text(540, 700, 'Congratulations!\nYou have completed ' + (level-1) + ' levels.', { fixedWidth: 1000, fixedHeight: 200 })
             .setStyle({
                 fontSize: '76px',
                 fontFamily: 'RR',
