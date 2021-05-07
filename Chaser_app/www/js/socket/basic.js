@@ -28,6 +28,8 @@ Client.socket.on('login',function(data){
     if(data.result)
     {
         userData = data.result;
+        window.localStorage.setItem("UserName", userData.username);
+        window.localStorage.setItem("Password", userData.password);
         stripe_key = data.stripe_key;
         
         game.scene.stop('LoginScreen');
