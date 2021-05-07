@@ -115,7 +115,8 @@ class EndScreen extends Phaser.Scene{
         this.coinButton = this.add.image(540,1200,'ReviveCoin');
         this.coinButton.setInteractive().on('pointerdown', () => {
             userData.coin = Number.parseInt(userData.coin) - 1000;
-            Client.level_end(0, -1000, 0);
+            userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
+            Client.level_end(3, -1000, 0);
             for(let i=0; i<3; i++)
             {
                 if(i+1 > userData.heart)

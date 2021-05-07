@@ -117,10 +117,10 @@ class GameScreen extends Phaser.Scene{
                 x = 800;
             else if(x<200)
                 x = 200;
-            if(y>1400)
-                y = 1400;
-            else if(y<800)
-                y = 800;
+            if(y>1700)
+                y = 1700;
+            else if(y<600)
+                y = 600;
             this.triangle[index].setPosition(x,y);
             this.triangle[index].setScale(this.scale[index]);
             this.triangle[index].setAngle(this.triangle[index].angle + this.angle[index]);
@@ -182,24 +182,26 @@ class GameScreen extends Phaser.Scene{
         this.updateUser();
         this.levelText.setText(level);
         $('body').css('background-image', 'url(../../images/background/' + (((level-1)%50) + 1) + '.jpg)');
-        for(let distraction_index = 0; distraction_index < level; distraction_index++){
-            if(this.triangle.length < distraction_index+1)
-            {
-                let particle = "";
-                if(distraction_index % 4 == 0){
-                    particle = "triangle";
-                } else if(distraction_index % 4 == 1){
-                    particle = "rectangle";
-                } else if(distraction_index % 4 == 2){
-                    particle = "pentagon";
-                } else if(distraction_index % 4 == 3){
-                    particle = "circle";
+        if(level>15){
+            for(let distraction_index = 0; distraction_index < level-15; distraction_index++){
+                if(this.triangle.length < distraction_index+1)
+                {
+                    let particle = "";
+                    if(distraction_index % 4 == 0){
+                        particle = "triangle";
+                    } else if(distraction_index % 4 == 1){
+                        particle = "rectangle";
+                    } else if(distraction_index % 4 == 2){
+                        particle = "pentagon";
+                    } else if(distraction_index % 4 == 3){
+                        particle = "circle";
+                    }
+                    this.triangle.push(this.add.image(540, 1000, particle));
+                    this.vectorX.push(Math.random()*30-15);
+                    this.vectorY.push(Math.random()*30-15);
+                    this.angle.push(Math.random()*20-10);
+                    this.scale.push(1 + Math.random()*0.1 - 0.05);
                 }
-                this.triangle.push(this.add.image(540, 1000, particle));
-                this.vectorX.push(Math.random()*30-15);
-                this.vectorY.push(Math.random()*30-15);
-                this.angle.push(Math.random()*20-10);
-                this.scale.push(1 + Math.random()*0.1 - 0.05);
             }
         }
 

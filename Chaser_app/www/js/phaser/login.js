@@ -65,7 +65,7 @@ class LoginScreen extends Phaser.Scene{
         this.userNameImage = this.add.image(540,820,'InputBack');
         this.userName = this.add.rexInputText(540, 820, 620, 70, 
             {
-                text:'admin',
+                text:window.localStorage.getItem('UserName'),
                 type:'text',
                 fontSize: '64px',
                 fontFamily: 'RR',
@@ -85,7 +85,7 @@ class LoginScreen extends Phaser.Scene{
         this.passwordImage = this.add.image(540,1000,'InputBack');
         this.password = this.add.rexInputText(540, 1000, 620, 70, 
             {
-                text:'1234',
+                text:window.localStorage.getItem('Password'),
                 type:'password',
                 fontSize: '64px',
                 fontFamily: 'RR',
