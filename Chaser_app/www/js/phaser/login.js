@@ -46,6 +46,8 @@ class LoginScreen extends Phaser.Scene{
         this.load.image("ReviveCoin", "./images/revive_coin.png");
         this.load.image("Back", "./images/back.png");
         this.load.image("PlayAgain", "./images/play_again.png");
+        this.load.image("PlayMethod", "./images/play_method.jpg");
+        this.load.image("Help", "./images/help.png");
 
         for(let i=0; i<10; i++){
             this.load.image("Avatar_" + i, "./images/avatar/" + i + ".png");
@@ -165,8 +167,8 @@ class LoginScreen extends Phaser.Scene{
 
     toast_register_succeed(){
         var toast = this.rexUI.add.toast({
-            x: 150,
-            y: 550,
+            x: 540,
+            y: 1500,
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, 0xcc4040),
             text: this.add.text(0, 0, '', {

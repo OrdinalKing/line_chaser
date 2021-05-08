@@ -120,8 +120,8 @@ class RegisterScreen extends Phaser.Scene{
 
     toast_failed(){
         var toast = this.rexUI.add.toast({
-            x: 150,
-            y: 550,
+            x: 540,
+            y: 1500,
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, 0xcc4040),
             text: this.add.text(0, 0, '', {

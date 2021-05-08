@@ -24,7 +24,7 @@ const config = {
         height: 1920
     },
     transparent: true,
-    scene: [LoginScreen, HomeScreen, SettingScreen, GameScreen, EndScreen, RegisterScreen, StripeScreen ],
+    scene: [LoginScreen, HomeScreen, SettingScreen, GameScreen, EndScreen, RegisterScreen, StripeScreen, HelpScreen ],
     dom: {
         createContainer: true
     },
