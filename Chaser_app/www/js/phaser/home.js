@@ -64,7 +64,7 @@ class HomeScreen extends Phaser.Scene{
         })
         .setOrigin(0.5,0.5);
 
-        this.play = this.add.image(270,450,'Play');
+        this.play = this.add.image(245,450,'Play');
         this.play.setInteractive().on('pointerdown', () => {
 
             target_width = 20;
@@ -105,11 +105,18 @@ class HomeScreen extends Phaser.Scene{
             this.play.disableInteractive();
             this.play.setAlpha(0.5);
         }
-        this.setting = this.add.image(810,450,'Setting');
+        this.setting = this.add.image(675,450,'Setting');
         this.setting.setInteractive().on('pointerdown', () => {
             game.domContainer.style.display = 'block';
             game.scene.stop('HomeScreen');
             game.scene.start('SettingScreen');
+        });
+
+        this.help = this.add.image(965,450,'Help');
+        this.help.setInteractive().on('pointerdown', () => {
+            game.domContainer.style.display = 'block';
+            game.scene.stop('HomeScreen');
+            game.scene.start('HelpScreen');
         });
 
         this.waitingText = this.add.text(540, 800, 'Fetching Ranking From Server...', { fixedWidth: 1000, fixedHeight: 200 })
@@ -279,53 +286,5 @@ class HomeScreen extends Phaser.Scene{
             this.play.setAlpha(1);
         }
     }
-    toast_tournament_failed(){
-        // var toast = this.rexUI.add.toast({
-        //     x: 150,
-        //     y: 550,
 
-        //     background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, 0xcc4040),
-        //     text: this.add.text(0, 0, '', {
-        //         fontSize: '18px'
-        //     }),
-        //     space: {
-        //         left: 20,
-        //         right: 20,
-        //         top: 20,
-        //         bottom: 20,
-        //     },
-
-        //     duration: {
-        //         in: 250,
-        //         hold: 1000,
-        //         out: 250,
-        //     },
-        // })
-        // .show('Can not take part in tournament...')
-    }
-
-    toast_game_failed(){
-        var toast = this.rexUI.add.toast({
-            x: 150,
-            y: 550,
-
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, 0xcc4040),
-            text: this.add.text(0, 0, '', {
-                fontSize: '18px'
-            }),
-            space: {
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: 20,
-            },
-
-            duration: {
-                in: 250,
-                hold: 1000,
-                out: 250,
-            },
-        })
-        .show('Can not play game...')
-    }
 }
