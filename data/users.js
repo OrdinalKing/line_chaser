@@ -1,4 +1,4 @@
-const stripe = require('stripe')('sk_test_51Ii4B9C0Gkep2CQcCYChegkuOBEURfAFGmPijUT5cpA3NNgtQQnIXPdKGUkOZh5X9DKCy16W58kumCQDjXpgrxak00jAet4uMY'); // Add your Secret Key Here
+const stripe = require('stripe')('sk_test_51IhyPDAWkB06UtUHrj9tcPEAlpW08bJB0CUcrRRUd3Sz2lMFMhl4yT59nT6vJhXZkVQ4SloqaMDs4Y8PNLjDss7W00QrMmpJZB'); // Add your Secret Key Here
 const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.users;
 let { ObjectId } = require('mongodb');
@@ -66,6 +66,7 @@ const exportedMethods = {
             heart: 3,
             coin: 0,
             revive: 24,
+            remove_admob: 0,
         };
 
         const newInsertInformation = await userCollection.insertOne(newuser);
@@ -140,7 +141,7 @@ const exportedMethods = {
         return true;
     },
 
-    async purchaseCoin(username, tokenId, socket) {
+    async purchaseCoin(username, tokenId, method, socket) {
         console.log(tokenId.id)
         if (!username || !tokenId) {
             console.log('ReferenceError: Username is not supplied while addUserValue');
@@ -157,6 +158,20 @@ const exportedMethods = {
         }
 
         try {
+            let purchase_amount = 0;
+            let purchase_description = "";
+            if(method == 0){
+                purchase_amount = 299;
+                purchase_description = "Line_chaser Remove Admob for this month";
+            }
+            else if(method == 1){
+                purchase_amount = 99;
+                purchase_description = "Line_chaser Purchase 1000 Coin";
+            }
+            else if(method == 2){
+                purchase_amount = 299;
+                purchase_description = "Line_chaser Purchase 10000 Coin";
+            }
             console.log("--------------we are here for stripe!")
             stripe.customers.create({
                 name: user.username,
@@ -166,24 +181,34 @@ const exportedMethods = {
               .then(customer => {
                   console.log("we are here for stripe!")
                   stripe.charges.create({
-                    amount: 100,
-                    currency: "usd",
-                    customer: customer.id
+                    amount: purchase_amount,
+                    currency: "gbp",
+                    customer: customer.id,
+                    description: purchase_description,
                   })
               }
               )
               .then(async () => {
                     const updateduserData = user;
-                    updateduserData.coin += 10000;
-            
+                    if(method == 2)
+                        updateduserData.coin += 10000;
+                    else if(method == 1)
+                        updateduserData.coin += 1000;
+                    else if(method == 0){
+                        var date = new Date();
+                        var month = date.getMonth();
+                        updateduserData.remove_admob = month;
+                    }
                     const updatedInfo = await userCollection.updateOne({ _id: user._id }, { $set: updateduserData });
             
                     if (updatedInfo.modifiedCount === 0) {
                         console.log('could not update UserValue successfully');
                     }
                     socket.emit('update_userdata', {result: updateduserData});
+                    socket.emit('purchase_coin', {result: "Purchase Succeed"});
                 })
                 .catch((err) =>{
+                    socket.emit('purchase_coin', {result: false});
                     console.log(err)
                 });
             } catch (err) {

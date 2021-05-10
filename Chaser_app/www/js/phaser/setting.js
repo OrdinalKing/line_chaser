@@ -67,12 +67,16 @@ class SettingScreen extends Phaser.Scene{
 
         this.admobButton = this.add.image(270,570,'ReviveAdmob').setScale(0.7);
         this.admobButton.setInteractive().on('pointerdown', () => {
-            // AdMob.showInterstitial();
-            // AdMob.prepareInterstitial({
-            //     adId: admobid.interstitial,
-            //     autoShow:false,
-            //     isTesting: true,
-            // });
+            var date = new Date();
+            var month = date.getMonth();
+            if(userData.remove_admob != month){
+                AdMob.showInterstitial();
+                AdMob.prepareInterstitial({
+                    adId: admobid.interstitial,
+                    autoShow:false,
+                    isTesting: true,
+                });
+            }
             userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
             Client.level_end(3, 0, 0);
             for(let i=0; i<3; i++)
@@ -122,9 +126,9 @@ class SettingScreen extends Phaser.Scene{
         this.purchaseAvatarButton = this.add.image(0,0,'Purchase').setScale(0.7).setDepth(3);
         this.purchaseAvatarButton.setInteractive().on('pointerdown', () => {
             if(this.selected_avatar != -1){
-                if(userData.coin >= 250){
-                    userData.coin = Number.parseInt(userData.coin) - 250;
-                    Client.level_end(0, -250, 0);
+                if(userData.coin >= 100){
+                    userData.coin = Number.parseInt(userData.coin) - 100;
+                    Client.level_end(0, -100, 0);
                     userData.avatar = this.selected_avatar;
                     this.avatar.setTexture("Avatar_" + this.selected_avatar);
                     Client.user_data(userData.avatar);
