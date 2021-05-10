@@ -146,7 +146,7 @@ class LoginScreen extends Phaser.Scene{
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, 0xcc4040),
             text: this.add.text(0, 0, '', {
-                fontSize: '18px'
+                fontSize: '48px'
             }),
             space: {
                 left: 20,
@@ -172,7 +172,7 @@ class LoginScreen extends Phaser.Scene{
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, 0xcc4040),
             text: this.add.text(0, 0, '', {
-                fontSize: '64px'
+                fontSize: '48px'
             }),
             space: {
                 left: 20,

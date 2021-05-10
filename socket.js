@@ -47,7 +47,8 @@ const exportedMethods = {
                             players[data.username] = socket.id;
                             socket.handshake.session.username = data.username;
                             socket.handshake.session.save();
-                            socket.emit('login', { result: result, stripe_key: "pk_test_51Ii4B9C0Gkep2CQcRTed0VRj17eVPjyk4VL8D45ASc8NvMMKvWkBuqdw6sYIN5BZwwXMa2DAMQXe1uTJ3huVDchw00DMwjc4G8"});
+                            // socket.emit('login', { result: result, stripe_key: "pk_live_51IhyPDAWkB06UtUHCSbOqJu4pYMzAsSXYeJGtrDhysU5OudjQOPedGAhQqhxciNvabMSgdaPjcqaSPEA91Th8Mk900qzAdTxkd"});
+                            socket.emit('login', { result: result, stripe_key: "pk_test_51IhyPDAWkB06UtUHhIqCmHf2Yj9XfljP2HmhYgTMXaa3MZGhAHtyUHqJuXtOL1sAwaSvdKPyaIJx0Ki45UleW5xu00ieI01k3E"});
                         } else {
                             socket.emit('login', { result: false });
                         }
@@ -95,7 +96,7 @@ const exportedMethods = {
 
             socket.on('purchase_coin', (data) => {
                 console.log('purchase_coin request recevied : ', data);
-                users.purchaseCoin(data.username, data.tokenId, socket).then((result) => {
+                users.purchaseCoin(data.username, data.tokenId, data.method, socket).then((result) => {
                 });
             });
 

@@ -181,7 +181,7 @@ class GameScreen extends Phaser.Scene{
         this.board.setInteractive();
         this.updateUser();
         this.levelText.setText(level);
-        $('body').css('background-image', 'url(../../images/background/' + (((level-1)%50) + 1) + '.jpg)');
+        $('body').css('background-image', 'url(images/background/' + (((level-1)%50) + 1) + '.jpg)');
         if(level>15){
             for(let distraction_index = 0; distraction_index < level-15; distraction_index++){
                 if(this.triangle.length < distraction_index+1)
