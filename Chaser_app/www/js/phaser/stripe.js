@@ -35,34 +35,46 @@ class StripeScreen extends Phaser.Scene{
         this.resultText.setShadow(10, 10, "#333333", 10, true, true);
 
         this.method = -1;
-        this.removeAdmob = this.add.image(240,550,'Help');
+        this.removeAdmob = this.add.image(240,550,'RemoveAdmobUp');
         this.removeAdmob.setInteractive().on('pointerdown', () => {
             if(this.method == 0){
+                this.removeAdmob.setTexture('RemoveAdmobUp');
                 this.method = -1;
             }
             else
             {
                 this.method = 0;
+                this.removeAdmob.setTexture('RemoveAdmobDown');
+                this.coin1000.setTexture('Gold1000Up');
+                this.coin10000.setTexture('Gold10000Up');
             }
         });
-        this.coin1000 = this.add.image(540,550,'Help');
+        this.coin1000 = this.add.image(540,550,'Gold1000Up');
         this.coin1000.setInteractive().on('pointerdown', () => {
             if(this.method == 1){
+                this.coin1000.setTexture('Gold1000Up');
                 this.method = -1;
             }
             else
             {
                 this.method = 1;
+                this.removeAdmob.setTexture('RemoveAdmobUp');
+                this.coin1000.setTexture('Gold1000Down');
+                this.coin10000.setTexture('Gold10000Up');
             }
         });
-        this.coin10000 = this.add.image(840,550,'Help');
+        this.coin10000 = this.add.image(840,550,'Gold10000Up');
         this.coin10000.setInteractive().on('pointerdown', () => {
             if(this.method == 2){
+                this.coin10000.setTexture('Gold10000Up');
                 this.method = -1;
             }
             else
             {
                 this.method = 2;
+                this.removeAdmob.setTexture('RemoveAdmobUp');
+                this.coin1000.setTexture('Gold1000Up');
+                this.coin10000.setTexture('Gold10000Down');
             }
         });
 
