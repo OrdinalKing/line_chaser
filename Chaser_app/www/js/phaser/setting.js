@@ -65,7 +65,7 @@ class SettingScreen extends Phaser.Scene{
         })
         .setOrigin(0.5,0.5);
 
-        this.admobButton = this.add.image(270,570,'ReviveAdmob').setScale(0.7);
+        this.admobButton = this.add.image(270,490,'ReviveAdmob').setScale(0.7);
         this.admobButton.setInteractive().on('pointerdown', () => {
             var date = new Date();
             var month = date.getMonth();
@@ -87,7 +87,7 @@ class SettingScreen extends Phaser.Scene{
                     this.hearts[i].setVisible(true);
             }
         });
-        this.coinButton = this.add.image(810,570,'ReviveCoin').setScale(0.7);
+        this.coinButton = this.add.image(810,490,'ReviveCoin').setScale(0.7);
         this.coinButton.setInteractive().on('pointerdown', () => {
             userData.coin = Number.parseInt(userData.coin) - 1000;
             userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
@@ -109,17 +109,27 @@ class SettingScreen extends Phaser.Scene{
             this.coinButton.disableInteractive();
             this.coinButton.setAlpha(0.5);
         }
-        this.purchaseButton = this.add.image(810,470,'PurchaseCoin').setScale(0.7);
+        this.purchaseButton = this.add.image(810,390,'PurchaseCoin').setScale(0.7);
         this.purchaseButton.setInteractive().on('pointerdown', () => {
+            game.domContainer.style.display = 'block';
             game.scene.stop('SettingScreen');
             game.scene.start('StripeScreen');
-            game.domContainer.style.display = 'block';
         });
-        this.mainButton = this.add.image(270, 470,'MainPage').setScale(0.7);
+        this.mainButton = this.add.image(270, 390,'MainPage').setScale(0.7);
         this.mainButton.setInteractive().on('pointerdown', () => {
+            game.domContainer.style.display = 'block';
             game.scene.stop('SettingScreen');
             game.scene.start('HomeScreen');
+        });
+
+        this.logoutButton = this.add.image(270, 590,'Logout').setScale(0.7);
+        this.logoutButton.setInteractive().on('pointerdown', () => {
+            Client.logout();
+            window.localStorage.removeItem("UserName");
+            window.localStorage.removeItem("Password");
             game.domContainer.style.display = 'block';
+            game.scene.stop('SettingScreen');
+            game.scene.start('LoginScreen');
         });
         this.purchaseAvatarButton = this.add.image(0,0,'Purchase').setScale(0.7).setDepth(3);
         this.purchaseAvatarButton.setInteractive().on('pointerdown', () => {

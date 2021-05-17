@@ -10,6 +10,10 @@ Client.login = function(username, password){
     Client.socket.emit('login', {username: username, password: password});
 };
 
+Client.logout = function(){
+    Client.socket.emit('logout', {username: userData.username});
+};
+
 Client.register = function(username, email, password){
     Client.socket.emit('register', {username: username, email: email, password: password});
 };

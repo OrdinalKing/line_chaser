@@ -59,6 +59,15 @@ const exportedMethods = {
                 }
             });
 
+            socket.on('logout', (data) => {
+                // REQUIRE INFO: data.username
+                console.log('logout request recevied');
+                // Set PLAYERS value of this user as 'undefined' to remove the user from PLAYERS Object
+                socket.handshake.session.username = undefined;
+                socket.handshake.session.save();
+                players[data.username] = undefined;
+            });
+
             socket.on('register', async(data) => {
                 console.log('register request is received');
                 if(!data.username) {
