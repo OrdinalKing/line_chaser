@@ -1,8 +1,8 @@
 {
-  "name": "line_chaser",
-  "displayName": "Line Chaser",
+  "name": "thumb_hero",
+  "displayName": "Thumb Hero",
   "version": "1.0.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "description": "A reaction game with simple bars",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,11 +10,11 @@
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "Apache Cordova Team",
+  "author": "Planet of the apps team",
   "license": "Apache-2.0",
   "devDependencies": {
     "admob-demo-game-phaser": "^1.0.0",
-    "cordova-android": "^9.0.0",
+    "cordova-android": "^9.1.0",
     "cordova-plugin-admobpro": "^2.49.0",
     "cordova-plugin-extension": "^1.5.4",
     "cordova-plugin-stripe": "^1.5.3",
@@ -24,10 +24,11 @@
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-plugin-admobpro": {
-        "ADMOB_APP_ID": "quiz_app",
+        "ADMOB_APP_ID": "thumb_hero",
         "PLAY_SERVICES_VERSION": "16.0.0"
       },
-      "cordova-plugin-stripe": {}
+      "cordova-plugin-stripe": {},
+      "admob-demo-game-phaser": {}
     },
     "platforms": [
       "android"

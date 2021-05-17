@@ -93,12 +93,16 @@ class EndScreen extends Phaser.Scene{
 
         this.admobButton = this.add.image(540,1000,'ReviveAdmob');
         this.admobButton.setInteractive().on('pointerdown', () => {
-            // AdMob.showInterstitial();
-            // AdMob.prepareInterstitial({
-            //     adId: admobid.interstitial,
-            //     autoShow:false,
-            //     isTesting: true,
-            // });
+            var date = new Date();
+            var month = date.getMonth();
+            if(userData.remove_admob != month){
+                AdMob.showInterstitial();
+                AdMob.prepareInterstitial({
+                    adId: admobid.interstitial,
+                    autoShow:false,
+                    isTesting: true,
+                });
+            }
             userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
             Client.level_end(3, 0, 0);
             for(let i=0; i<3; i++)
