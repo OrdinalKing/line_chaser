@@ -254,8 +254,11 @@ class GameScreen extends Phaser.Scene{
             bPass = true;
         }
         else{
-            userData.heart = Number.parseInt(userData.heart) -1;
-            Client.level_end(-1, 0, 0);
+            if(level > 1)
+            {
+                userData.heart = Number.parseInt(userData.heart) -1;
+                Client.level_end(-1, 0, 0);
+            }
         }
 
         if(userData.heart>0){
