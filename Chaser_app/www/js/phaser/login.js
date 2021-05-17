@@ -54,6 +54,7 @@ class LoginScreen extends Phaser.Scene{
         this.load.image("Gold10000Down", "./images/gold10000_down.png");
         this.load.image("Gold10000Up", "./images/gold10000_up.png");
         this.load.image("Help", "./images/help.png");
+        this.load.image("Logout", "./images/logout.png");
 
         for(let i=0; i<10; i++){
             this.load.image("Avatar_" + i, "./images/avatar/" + i + ".png");
