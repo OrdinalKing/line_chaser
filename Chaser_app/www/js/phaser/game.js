@@ -208,7 +208,7 @@ class GameScreen extends Phaser.Scene{
         this.counter = 0;
         this.direction = 1;
         this.turn = false;
-        this.speed = 5 + Math.sqrt(level*2);
+        this.speed = 5 + Math.sqrt(level);
         this.cur_position = 0.0;
         this.path = bar_path_sample[path_index];
 
