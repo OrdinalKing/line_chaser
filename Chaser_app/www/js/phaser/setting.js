@@ -100,8 +100,6 @@ class SettingScreen extends Phaser.Scene{
                     this.hearts[i].setVisible(true);
             }
             this.coinText.setText(userData.coin);
-            this.againButton.setAlpha(1.0);
-            this.againButton.setInteractive();
             if(Number.parseInt(userData.coin)<1000){
                 this.coinButton.disableInteractive();
                 this.coinButton.setAlpha(0.5);
