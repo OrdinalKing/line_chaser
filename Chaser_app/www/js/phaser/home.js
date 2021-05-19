@@ -72,7 +72,7 @@ class HomeScreen extends Phaser.Scene{
             target_position = 320;
             path_index = 0;
             level = 1;
-
+            revive_count = 0;
             // //For Test
             // level = 50;
             // userData.heart = 3;

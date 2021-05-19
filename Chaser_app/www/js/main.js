@@ -11,7 +11,7 @@ var target_position = 0;
 var level = 0;
 var point = 0;
 var coin = 0;
-
+var revive_count = 0;
 var path_index = 0;
 
 const config = {

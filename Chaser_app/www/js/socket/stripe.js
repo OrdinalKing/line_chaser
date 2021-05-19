@@ -9,7 +9,7 @@ Client.socket.on('purchase_coin',function(data){
         toast_error(activeScene, data.result);
     }
     else {
-        toast_error(activeScene, "Purchase Failed.");
+        toast_error(activeScene, "Purchase failed on server.");
     }
 });
 
