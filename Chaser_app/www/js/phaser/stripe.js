@@ -171,26 +171,7 @@ class StripeScreen extends Phaser.Scene{
                 this.toast_method();
                 return;
             }
-            cordova.plugins.stripe.setPublishableKey(stripe_key);
-            var card = {
-                number: this.cardNumber.text, 
-                expMonth: Number.parseInt(this.expMonth.text), 
-                expYear: Number.parseInt(this.expYear.text), 
-                cvc: this.cvc.text,
-            };
-
-            var self = this;
-            function onSuccess(tokenId) {
-                console.log(tokenId);
-                Client.purchase_coin(tokenId, self.method);
-            }
-             
-            function onError(errorMessage) {
-                console.log(errorMessage);
-                //toast
-            }
-             
-            cordova.plugins.stripe.createCardToken(card, onSuccess, onError);
+            this.confirm_modal();
         });
 
         this.backButton = this.add.image(540,1600,'Back');
@@ -260,33 +241,104 @@ class StripeScreen extends Phaser.Scene{
         .show('Please Select Method...')
     }
 
+    createLabel(text) {
+        return this.rexUI.add.label({
+            width: 280,
+            height: 140,
+    
+            background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0xfa5c00),
+    
+            text: this.add.text(0, 0, text, {
+                fontFamily: 'RR',
+                fontWeight: 'bold',
+                fontSize: '90px',
+                color: "#ffffff",
+                align: "center"
+            }),
+    
+            space: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10
+            },
+    
+            align: "center"
+        });
+    }
+    
+    confirm_modal(){
+        var cover = this.add.rectangle(-1000,-1000,2080,2680,0x222222, 0.2).setOrigin(0,0).setDepth(1).setInteractive();
+        var dialog = this.rexUI.add.dialog({
+            x: 540,
+            y: 300,
+    
+            background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0xffffff),
+            content: this.add.text(0, 0, 'ARE YOU GOING TO\nREALLY PURCHASE?', {
+                fontFamily: 'RR',
+                fontWeight: 'bold',
+                fontSize: '64px',
+                color: "#106eac",
+                align: "center"
+            }),
+    
+            actions: [
+                this.createLabel('YES'),
+                this.createLabel('NO')
+            ],
+    
+            space: {
+                content: 25,
+                action: 15,
+    
+                left: 60,
+                right: 60,
+                top: 40,
+                bottom: 40,
+            },
+    
+            align: {
+                actions: 'center', // 'center'|'left'|'right'
+            },
+    
+            expand: {
+                content: false, // Content is a pure text object
+            }
+        }).setDepth(100)
+            .layout()
+            .popUp(1000);
+    
+        var scene = this;
+        dialog
+            .on('button.click', function (button, groupName, index) {
+                cordova.plugins.stripe.setPublishableKey(stripe_key);
+                var card = {
+                    number: scene.cardNumber.text, 
+                    expMonth: Number.parseInt(scene.expMonth.text), 
+                    expYear: Number.parseInt(scene.expYear.text), 
+                    cvc: scene.cvc.text,
+                };
+    
+                function onSuccess(tokenId) {
+                    let activeScene = game.scene.getScenes(true)[0];
+                    toast_error(activeScene, "Purchase requested to server.");
+                    Client.purchase_coin(tokenId, scene.method);
+                }
+                 
+                function onError(errorMessage) {
+                    let activeScene = game.scene.getScenes(true)[0];
+                    toast_error(activeScene, "Purchase failed on stripe.");
+                }
+                 
+                cordova.plugins.stripe.createCardToken(card, onSuccess, onError);
+                cover.destroy();
+                dialog.destroy();
+            })
+            .on('button.over', function (button, groupName, index) {
+                // button.getElement('background').setStrokeStyle(1, 0xffffff);
+            })
+            .on('button.out', function (button, groupName, index) {
+                // button.getElement('background').setStrokeStyle();
+            });
+    }
 }
-
-var FitTo = function (child, parent, out) {
-    if (out === undefined) {
-        out = {};
-    } else if (out === true) {
-        out = globalSize;
-    }
-
-    if ((child.width <= parent.width) && (child.height <= parent.height)) {
-        out.width = child.width;
-        out.height = child.height;
-        return out;
-    }
-
-    var childRatio = child.width / child.height;
-    out.width = Math.min(child.width, parent.width);
-    out.height = Math.min(child.height, parent.height);
-    var ratio = out.width / out.height;
-
-    if (ratio < childRatio) {
-        out.height = out.width / childRatio;
-    } else if (ratio > childRatio) {
-        out.width = out.height * childRatio;
-    }
-
-    return out;
-}
-
-var globalSize = {};
