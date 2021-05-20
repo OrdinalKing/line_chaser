@@ -91,7 +91,12 @@ class EndScreen extends Phaser.Scene{
         //  Apply the shadow to the Stroke and the Fill (this is the default)
         this.resultText.setShadow(10, 10, "#333333", 10, true, true);
 
-        this.admobButton = this.add.image(540,1000,'ReviveAdmob');
+        if(revive_count<1){
+            this.admobButton = this.add.image(540,1000,'ContinueAdmob');
+        }
+        else{
+            this.admobButton = this.add.image(540,1000,'StartAgainAdmob');
+        }
         this.admobButton.setInteractive().on('pointerdown', () => {
             var date = new Date();
             var month = date.getMonth();
@@ -112,20 +117,36 @@ class EndScreen extends Phaser.Scene{
                 else
                     this.hearts[i].setVisible(true);
             }
-            this.againButton.setAlpha(1.0);
-            this.againButton.setInteractive();
             this.admobButton.disableInteractive();
             this.admobButton.setAlpha(0.5);
             this.coinButton.disableInteractive();
             this.coinButton.setAlpha(0.5);
             this.revive_audio.play();
             revive_count++;
+            if(revive_count<2){
+                game.scene.stop('EndScreen');
+                game.scene.start('GameScreen');
+            } else{
+                target_width = 20;
+                target_position = Math.floor(Math.random() * 280) + 40;
+                // target_position = 320;
+                path_index = 0;
+                level = 2;
+                revive_count = 0;
+    
+                game.scene.stop('EndScreen');
+                game.scene.start('GameScreen');
+            }
         });
         if(Number.parseInt(userData.heart)>=3){
             this.admobButton.disableInteractive();
             this.admobButton.setAlpha(0.5);
         }
-        this.coinButton = this.add.image(540,1200,'ReviveCoin');
+        if(revive_count<1){
+            this.coinButton = this.add.image(540,1200,'ContinueCoin');
+        } else {
+            this.coinButton = this.add.image(540,1200,'StartAgainCoin');
+        }
         this.coinButton.setInteractive().on('pointerdown', () => {
             userData.coin = Number.parseInt(userData.coin) - 1000;
             userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
@@ -138,14 +159,26 @@ class EndScreen extends Phaser.Scene{
                     this.hearts[i].setVisible(true);
             }
             this.coinText.setText(userData.coin);
-            this.againButton.setAlpha(1.0);
-            this.againButton.setInteractive();
             this.admobButton.disableInteractive();
             this.admobButton.setAlpha(0.5);
             this.coinButton.disableInteractive();
             this.coinButton.setAlpha(0.5);
             this.revive_audio.play();
             revive_count++;
+            if(revive_count<2){
+                game.scene.stop('EndScreen');
+                game.scene.start('GameScreen');
+            } else{
+                target_width = 20;
+                target_position = Math.floor(Math.random() * 280) + 40;
+                // target_position = 320;
+                path_index = 0;
+                level = 2;
+                revive_count = 0;
+    
+                game.scene.stop('EndScreen');
+                game.scene.start('GameScreen');
+            }
         });
         if(Number.parseInt(userData.coin)<1000 || Number.parseInt(userData.heart)>=3){
             this.coinButton.disableInteractive();
@@ -156,30 +189,7 @@ class EndScreen extends Phaser.Scene{
             game.scene.stop('EndScreen');
             game.scene.start('StripeScreen');
         });
-        if(revive_count<1)
-        {
-            this.againButton = this.add.image(540,1600,'PlayAgain');
-            this.againButton.disableInteractive().on('pointerdown', () => {
-                game.scene.stop('EndScreen');
-                game.scene.start('GameScreen');
-            });
-        }
-        else{
-            this.againButton = this.add.image(540,1600,'StartAgain');
-            this.againButton.disableInteractive().on('pointerdown', () => {
-                target_width = 20;
-                target_position = Math.floor(Math.random() * 280) + 40;
-                // target_position = 320;
-                path_index = 0;
-                level = 2;
-                revive_count = 0;
-    
-                game.scene.stop('EndScreen');
-                game.scene.start('GameScreen');
-            });
-        }
-        this.againButton.setAlpha(0.5);
-        this.mainButton = this.add.image(540,1800,'MainPage');
+        this.mainButton = this.add.image(540,1600,'MainPage');
         this.mainButton.setInteractive().on('pointerdown', () => {
             game.scene.stop('EndScreen');
             game.scene.start('HomeScreen');
@@ -200,12 +210,6 @@ class EndScreen extends Phaser.Scene{
         }
         this.coinText.setText(userData.coin);
         this.pointText.setText(userData.point);
-
-        if(userData.heart >0)
-        {
-            this.againButton.setAlpha(1.0);
-            this.againButton.setInteractive();
-        }
 
         if(Number.parseInt(userData.coin)>=1000){
             this.coinButton.setInteractive();

@@ -274,7 +274,7 @@ class StripeScreen extends Phaser.Scene{
             y: 300,
     
             background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0xffffff),
-            content: this.add.text(0, 0, 'ARE YOU GOING TO\nREALLY PURCHASE?', {
+            content: this.add.text(0, 0, 'CONFIRM PURCHASE', {
                 fontFamily: 'RR',
                 fontWeight: 'bold',
                 fontSize: '64px',
