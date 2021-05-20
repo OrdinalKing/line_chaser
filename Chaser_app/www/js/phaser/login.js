@@ -45,8 +45,10 @@ class LoginScreen extends Phaser.Scene{
         this.load.image("ReviveAdmob", "./images/revive_admob.png");
         this.load.image("ReviveCoin", "./images/revive_coin.png");
         this.load.image("Back", "./images/back.png");
-        this.load.image("PlayAgain", "./images/play_again.png");
-        this.load.image("StartAgain", "./images/start_again.png");
+        this.load.image("ContinueAdmob", "./images/continue_admob.png");
+        this.load.image("ContinueCoin", "./images/continue_coin.png");
+        this.load.image("StartAgainAdmob", "./images/start_again_admob.png");
+        this.load.image("StartAgainCoin", "./images/start_again_coin.png");
         this.load.image("PlayMethod", "./images/play_method.jpg");
         this.load.image("RemoveAdmobDown", "./images/removeadmob_down.png");
         this.load.image("RemoveAdmobUp", "./images/removeadmob_up.png");

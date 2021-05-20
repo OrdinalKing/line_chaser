@@ -91,6 +91,7 @@ class GameScreen extends Phaser.Scene{
         this.vectorY = [];
         this.angle = [];
         this.scale = [];
+        this.guide = undefined;
         this.initLevel();
     }
     update(){
@@ -132,8 +133,8 @@ class GameScreen extends Phaser.Scene{
             {
                 this.timer.remove();
                 this.time.removeEvent(this.timer);
-                if(!this.guide){
-                    this.guide = this.add.text(540, 1500, "Tap!!!")
+                if(this.guide == undefined){
+                    this.guide = this.add.text(540, 1500, "Tap Here!!!")
                     .setStyle({
                         fontSize: '120px',
                         fontFamily: 'RR',
@@ -176,6 +177,7 @@ class GameScreen extends Phaser.Scene{
 
         if(this.guide){
             this.guide.destroy();
+            this.guide = undefined;
         }
 
         this.board.setInteractive();
