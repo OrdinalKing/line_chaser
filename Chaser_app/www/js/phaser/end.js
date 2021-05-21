@@ -109,7 +109,7 @@ class EndScreen extends Phaser.Scene{
                 });
             }
             userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
-            Client.level_end(3, 0, 0);
+            Client.level_end(3, 0, 0, 0);
             for(let i=0; i<3; i++)
             {
                 if(i+1 > userData.heart)
@@ -150,7 +150,7 @@ class EndScreen extends Phaser.Scene{
         this.coinButton.setInteractive().on('pointerdown', () => {
             userData.coin = Number.parseInt(userData.coin) - 1000;
             userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
-            Client.level_end(3, -1000, 0);
+            Client.level_end(3, -1000, 0, 0);
             for(let i=0; i<3; i++)
             {
                 if(i+1 > userData.heart)
