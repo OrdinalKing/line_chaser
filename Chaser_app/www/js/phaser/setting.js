@@ -78,7 +78,7 @@ class SettingScreen extends Phaser.Scene{
                 });
             }
             userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
-            Client.level_end(3, 0, 0);
+            Client.level_end(3, 0, 0, 0);
             for(let i=0; i<3; i++)
             {
                 if(i+1 > userData.heart)
@@ -91,7 +91,7 @@ class SettingScreen extends Phaser.Scene{
         this.coinButton.setInteractive().on('pointerdown', () => {
             userData.coin = Number.parseInt(userData.coin) - 1000;
             userData.heart = (Number.parseInt(userData.heart) + 3) > 3 ? 3 : (Number.parseInt(userData.heart) + 3);
-            Client.level_end(3, -1000, 0);
+            Client.level_end(3, -1000, 0, 0);
             for(let i=0; i<3; i++)
             {
                 if(i+1 > userData.heart)
@@ -136,7 +136,7 @@ class SettingScreen extends Phaser.Scene{
             if(this.selected_avatar != -1){
                 if(userData.coin >= 100){
                     userData.coin = Number.parseInt(userData.coin) - 100;
-                    Client.level_end(0, -100, 0);
+                    Client.level_end(0, -100, 0, 0);
                     userData.avatar = this.selected_avatar;
                     this.avatar.setTexture("Avatar_" + this.selected_avatar);
                     Client.user_data(userData.avatar);

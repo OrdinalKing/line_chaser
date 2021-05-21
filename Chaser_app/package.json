@@ -32,9 +32,7 @@
       "cordova-plugin-stripe": {},
       "admob-demo-game-phaser": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   },
   "dependencies": {
     "phaser": "^3.54.0"

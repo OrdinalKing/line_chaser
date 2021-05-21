@@ -252,14 +252,14 @@ class GameScreen extends Phaser.Scene{
             let coin = Math.floor(level/10)*Math.floor(level/10);
             userData.coin = Number.parseInt(userData.coin) + coin;
             userData.point = Number.parseInt(userData.point) + level;
-            Client.level_end(0, coin, level);
+            Client.level_end(0, coin, level, level);
             bPass = true;
         }
         else{
             if(level > 1)
             {
                 userData.heart = Number.parseInt(userData.heart) -1;
-                Client.level_end(-1, 0, 0);
+                Client.level_end(-1, 0, 0, 0);
             }
         }
 

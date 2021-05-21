@@ -67,6 +67,7 @@ const exportedMethods = {
             coin: 0,
             revive: 24,
             remove_admob: 0,
+            level:0,
         };
 
         const newInsertInformation = await userCollection.insertOne(newuser);
@@ -95,6 +96,7 @@ const exportedMethods = {
 
         if (data.point) updateduserData.point = Number.parseInt(updateduserData.point) + data.point;
         if (data.coin) updateduserData.coin = Number.parseInt(updateduserData.coin) + data.coin;
+        if (data.level > updateduserData.level) updateduserData.level = data.level;
         if (data.heart!=0)
         {
             updateduserData.heart += data.heart;
