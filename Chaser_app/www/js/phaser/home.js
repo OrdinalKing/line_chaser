@@ -222,7 +222,7 @@ class HomeScreen extends Phaser.Scene{
         for(let i=0; i<rank_list.length; i++){
             if(rank_list[i].username == userData.username)
             {
-                sizer.add(this.add.text(0, 0, (i+1) + '   -   ' + rank_list[i].username + ' : ' + rank_list[i].point + '(Lv-' + rank_list[i].level + ')', { fixedWidth: 900, fixedHeight: 80 })
+                sizer.add(this.add.text(0, 0, (i+1) + '   -   ' + rank_list[i].username + ' : Lv-' + rank_list[i].level + '(' + rank_list[i].point + 'Pt)', { fixedWidth: 900, fixedHeight: 80 })
                 .setStyle({
                     fontSize: '64px',
                     fontFamily: 'RR',
@@ -232,7 +232,7 @@ class HomeScreen extends Phaser.Scene{
                 bInRanking = true;
             }
             else{
-                sizer.add(this.add.text(0, 0, (i+1) + '   -   ' + rank_list[i].username + ' : ' + rank_list[i].point + '(Lv-' + rank_list[i].level + ')', { fixedWidth: 900, fixedHeight: 80 })
+                sizer.add(this.add.text(0, 0, (i+1) + '   -   ' + rank_list[i].username + ' : Lv-' + rank_list[i].level + '(' + rank_list[i].point + 'Pt)', { fixedWidth: 900, fixedHeight: 80 })
                 .setStyle({
                     fontSize: '64px',
                     fontFamily: 'RR',
@@ -251,7 +251,7 @@ class HomeScreen extends Phaser.Scene{
                     color: '#ffffff',
                 }));
             }
-            sizer.add(this.add.text(0, 0, (my_rank+1) + '   -   ' + userData.username + ' : ' + userData.point, { fixedWidth: 900, fixedHeight: 80 })
+            sizer.add(this.add.text(0, 0, (my_rank+1) + '   -   ' + userData.username + ' : Lv-' + userData.level + '(' + userData.point + 'Pt)', { fixedWidth: 900, fixedHeight: 80 })
             .setStyle({
                 fontSize: '64px',
                 fontFamily: 'RR',

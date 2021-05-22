@@ -20,7 +20,7 @@ class StripeScreen extends Phaser.Scene{
     }
 
     create() {
-        this.resultText = this.add.text(540, 300, 'Stripe Payment', { fixedWidth: 1000, fixedHeight: 200 })
+        this.resultText = this.add.text(540, 400, 'Stripe Payment', { fixedWidth: 1000, fixedHeight: 200 })
         .setStyle({
             fontSize: '76px',
             fontFamily: 'RR',
@@ -34,52 +34,8 @@ class StripeScreen extends Phaser.Scene{
         //  Apply the shadow to the Stroke and the Fill (this is the default)
         this.resultText.setShadow(10, 10, "#333333", 10, true, true);
 
-        this.method = -1;
-        this.removeAdmob = this.add.image(240,550,'RemoveAdmobUp');
-        this.removeAdmob.setInteractive().on('pointerdown', () => {
-            if(this.method == 0){
-                this.removeAdmob.setTexture('RemoveAdmobUp');
-                this.method = -1;
-            }
-            else
-            {
-                this.method = 0;
-                this.removeAdmob.setTexture('RemoveAdmobDown');
-                this.coin1000.setTexture('Gold1000Up');
-                this.coin10000.setTexture('Gold10000Up');
-            }
-        });
-        this.coin1000 = this.add.image(540,550,'Gold1000Up');
-        this.coin1000.setInteractive().on('pointerdown', () => {
-            if(this.method == 1){
-                this.coin1000.setTexture('Gold1000Up');
-                this.method = -1;
-            }
-            else
-            {
-                this.method = 1;
-                this.removeAdmob.setTexture('RemoveAdmobUp');
-                this.coin1000.setTexture('Gold1000Down');
-                this.coin10000.setTexture('Gold10000Up');
-            }
-        });
-        this.coin10000 = this.add.image(840,550,'Gold10000Up');
-        this.coin10000.setInteractive().on('pointerdown', () => {
-            if(this.method == 2){
-                this.coin10000.setTexture('Gold10000Up');
-                this.method = -1;
-            }
-            else
-            {
-                this.method = 2;
-                this.removeAdmob.setTexture('RemoveAdmobUp');
-                this.coin1000.setTexture('Gold1000Up');
-                this.coin10000.setTexture('Gold10000Down');
-            }
-        });
-
-        this.cardNumberImage = this.add.image(540,800,'InputBack');
-        this.cardNumber = this.add.rexInputText(540, 800, 620, 70, 
+        this.cardNumberImage = this.add.image(540,700,'InputBack');
+        this.cardNumber = this.add.rexInputText(540, 700, 620, 70, 
             {
                 text:'',
                 type:'number',
@@ -89,7 +45,7 @@ class StripeScreen extends Phaser.Scene{
             })
         .setOrigin(0.5,0.5);
 
-        this.cardNumberText = this.add.text(210, 735, 'CardNumber', { fixedWidth: 200, fixedHeight: 32 })
+        this.cardNumberText = this.add.text(210, 635, 'CardNumber', { fixedWidth: 200, fixedHeight: 32 })
         .setStyle({
             fontSize: '28px',
             fontFamily: 'RR',
@@ -98,8 +54,8 @@ class StripeScreen extends Phaser.Scene{
         })
         .setOrigin(0,0.5);
 
-        this.expMonthImage = this.add.image(540,950,'InputBack');
-        this.expMonth = this.add.rexInputText(540, 950, 620, 70, 
+        this.expMonthImage = this.add.image(540,850,'InputBack');
+        this.expMonth = this.add.rexInputText(540, 850, 620, 70, 
             {
                 text:'',
                 type:'number',
@@ -108,7 +64,7 @@ class StripeScreen extends Phaser.Scene{
                 color: '#000000',
             })
         .setOrigin(0.5,0.5);
-        this.expMonthText = this.add.text(210, 885, 'ExpMonth', { fixedWidth: 200, fixedHeight: 32 })
+        this.expMonthText = this.add.text(210, 785, 'ExpMonth', { fixedWidth: 200, fixedHeight: 32 })
         .setStyle({
             fontSize: '28px',
             fontFamily: 'RR',
@@ -117,8 +73,8 @@ class StripeScreen extends Phaser.Scene{
         })
         .setOrigin(0,0.5);
 
-        this.expYearImage = this.add.image(540,1100,'InputBack');
-        this.expYear = this.add.rexInputText(540, 1100, 620, 70, 
+        this.expYearImage = this.add.image(540,1000,'InputBack');
+        this.expYear = this.add.rexInputText(540, 1000, 620, 70, 
             {
                 text:'',
                 type:'number',
@@ -127,7 +83,7 @@ class StripeScreen extends Phaser.Scene{
                 color: '#000000',
             })
         .setOrigin(0.5,0.5);
-        this.expYearText = this.add.text(210, 1035, 'ExpYear', { fixedWidth: 200, fixedHeight: 32 })
+        this.expYearText = this.add.text(210, 935, 'ExpYear', { fixedWidth: 200, fixedHeight: 32 })
         .setStyle({
             fontSize: '28px',
             fontFamily: 'RR',
@@ -136,8 +92,8 @@ class StripeScreen extends Phaser.Scene{
         })
         .setOrigin(0,0.5);
 
-        this.cvcImage = this.add.image(540,1250,'InputBack');
-        this.cvc = this.add.rexInputText(540, 1250, 620, 70, 
+        this.cvcImage = this.add.image(540,1150,'InputBack');
+        this.cvc = this.add.rexInputText(540, 1150, 620, 70, 
             {
                 text:'',
                 type:'number',
@@ -146,7 +102,7 @@ class StripeScreen extends Phaser.Scene{
                 color: '#000000',
             })
         .setOrigin(0.5,0.5);
-        this.cvcText = this.add.text(210, 1185, 'CVC', { fixedWidth: 200, fixedHeight: 32 })
+        this.cvcText = this.add.text(210, 1085, 'CVC', { fixedWidth: 200, fixedHeight: 32 })
         .setStyle({
             fontSize: '28px',
             fontFamily: 'RR',
@@ -154,23 +110,9 @@ class StripeScreen extends Phaser.Scene{
             color: '#ffffff',
         })
         .setOrigin(0,0.5);
-
-        // this.forgotText = this.add.text(860, 765, 'Forgot Password?', { fixedWidth: 250, fixedHeight: 32 })
-        // .setStyle({
-        //     fontSize: '28px',
-        //     fontFamily: 'RR',
-        //     fontWeight: 'bold',
-        //     color: '#ffffffa0',
-        // })
-        // .setOrigin(1,0.5);
 
         this.purchaseButton = this.add.image(540,1400,'Purchase');
         this.purchaseButton.setInteractive().on('pointerdown', () => {
-            if(this.method == -1)
-            {
-                this.toast_method();
-                return;
-            }
             this.confirm_modal();
         });
 
@@ -189,56 +131,6 @@ class StripeScreen extends Phaser.Scene{
     }
 
     update(){
-    }
-
-    toast_failed(){
-        var toast = this.rexUI.add.toast({
-            x: 540,
-            y: 1500,
-
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, 0xcc4040),
-            text: this.add.text(0, 0, '', {
-                fontSize: '48px'
-            }),
-            space: {
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: 20,
-            },
-
-            duration: {
-                in: 250,
-                hold: 1000,
-                out: 250,
-            },
-        })
-        .show('Purchase failed...')
-    }
-
-    toast_method(){
-        var toast = this.rexUI.add.toast({
-            x: 540,
-            y: 1500,
-
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, 0xcc4040),
-            text: this.add.text(0, 0, '', {
-                fontSize: '48px'
-            }),
-            space: {
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: 20,
-            },
-
-            duration: {
-                in: 250,
-                hold: 1000,
-                out: 250,
-            },
-        })
-        .show('Please Select Method...')
     }
 
     createLabel(text) {
@@ -309,6 +201,7 @@ class StripeScreen extends Phaser.Scene{
             .popUp(1000);
     
         var scene = this;
+        var method = item_type;
         dialog
             .on('button.click', function (button, groupName, index) {
                 cordova.plugins.stripe.setPublishableKey(stripe_key);
@@ -322,7 +215,7 @@ class StripeScreen extends Phaser.Scene{
                 function onSuccess(tokenId) {
                     let activeScene = game.scene.getScenes(true)[0];
                     toast_error(activeScene, "Purchase requested to server.");
-                    Client.purchase_coin(tokenId, scene.method);
+                    Client.purchase_coin(tokenId, method);
                 }
                  
                 function onError(errorMessage) {

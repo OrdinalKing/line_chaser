@@ -229,7 +229,7 @@ const exportedMethods = {
 
         const userCollection = await users();
         const my_rank = await userCollection.aggregate(
-            { $sort : {"point" : -1}},
+            { $sort : {"level": -1, "point" : -1}},
             {
                 "$group": {
                     "_id": false,

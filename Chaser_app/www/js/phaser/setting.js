@@ -113,7 +113,7 @@ class SettingScreen extends Phaser.Scene{
         this.purchaseButton.setInteractive().on('pointerdown', () => {
             game.domContainer.style.display = 'block';
             game.scene.stop('SettingScreen');
-            game.scene.start('StripeScreen');
+            game.scene.start('ShopScreen');
         });
         this.mainButton = this.add.image(270, 390,'MainPage').setScale(0.7);
         this.mainButton.setInteractive().on('pointerdown', () => {

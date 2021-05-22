@@ -15,6 +15,12 @@ class GameScreen extends Phaser.Scene{
     }
 
     create() {
+        let radius = 200;
+        let intensity = 1;
+        this.light = this.add.pointlight(850, 200, -1, radius, intensity).setVisible(false);
+        this.light.color.setTo(50,50,200);
+        this.light_time = 0;
+
         this.completion_audio = this.sound.add('completion');
         this.background_audio = this.sound.add('level_music', {loop: true});
         this.fail_audio = this.sound.add('fail');
@@ -252,6 +258,8 @@ class GameScreen extends Phaser.Scene{
             let coin = Math.floor(level/10)*Math.floor(level/10);
             userData.coin = Number.parseInt(userData.coin) + coin;
             userData.point = Number.parseInt(userData.point) + level;
+            this.light.setVisible(true);
+            this.light_time = 1;
             Client.level_end(0, coin, level, level);
             bPass = true;
         }
@@ -314,6 +322,14 @@ class GameScreen extends Phaser.Scene{
     }
 
     updateTimer(scene){
+        if(scene.light_time > 0){
+            scene.light_time++;
+            if(scene.light_time >=20){
+                scene.light.setVisible(false);
+                scene.light_time = 0;
+            }
+        }
+
         scene.counter = (scene.counter+1)%10;
         if(scene.cur_position >= 340)
         {
