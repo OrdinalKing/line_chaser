@@ -31,7 +31,9 @@ class GameScreen extends Phaser.Scene{
             fontFamily: 'RR',
             fontWeight: 'bold',
             align: "center",
-            color: '#ffff0080',
+            color: '#ffff00',
+            stroke: '#ff0000',
+            strokeThickness: 20,
         })
         .setOrigin(0.5,0.5).setDepth(1);
 
