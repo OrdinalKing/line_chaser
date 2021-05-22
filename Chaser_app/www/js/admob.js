@@ -36,4 +36,23 @@ function initApp() {
         isTesting: true,
     });
 
+    var clientIDs = {
+        "PayPalEnvironmentProduction": "YOUR_PRODUCTION_KEY", // not needed while testing
+        "PayPalEnvironmentSandbox": "YOUR_SANDBOX_KEY"
+    };
+
+    function onPayPalMobileInit() {
+        PayPalMobile.prepareToRender(
+            "PayPalEnvironmentSandbox", // or "PayPalEnvironmentProduction" 
+            new PayPalConfiguration({
+                merchantName: "Thumb Hero",
+                acceptCreditCards: true,
+                merchantPrivacyPolicyURL: "",
+                merchantUserAgreementURL: ""
+            }),
+            function() {
+                console.log("OK, ready to accept payments!")
+            });
+    }
+    PayPalMobile.init(clientIDs, onPayPalMobileInit);
 }

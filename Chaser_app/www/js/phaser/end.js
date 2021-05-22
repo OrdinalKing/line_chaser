@@ -187,7 +187,7 @@ class EndScreen extends Phaser.Scene{
         this.purchaseButton = this.add.image(540,1400,'PurchaseCoin');
         this.purchaseButton.setInteractive().on('pointerdown', () => {
             game.scene.stop('EndScreen');
-            game.scene.start('StripeScreen');
+            game.scene.start('ShopScreen');
         });
         this.mainButton = this.add.image(540,1600,'MainPage');
         this.mainButton.setInteractive().on('pointerdown', () => {

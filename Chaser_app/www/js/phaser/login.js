@@ -41,6 +41,8 @@ class LoginScreen extends Phaser.Scene{
         this.load.image('circle', './images/particles/circle.png');
         this.load.image("MainPage", "./images/main_page.png");
         this.load.image("PurchaseCoin", "./images/purchase_coin.png");
+        this.load.image("Stripe", "./images/stripe.png");
+        this.load.image("Paypal", "./images/paypal.png");
         this.load.image("Purchase", "./images/purchase.png");
         this.load.image("ReviveAdmob", "./images/revive_admob.png");
         this.load.image("ReviveCoin", "./images/revive_coin.png");

@@ -8,6 +8,7 @@ var stripe_key = "";
 
 var target_width = 10;
 var target_position = 0;
+var item_type = -1;
 var level = 0;
 var point = 0;
 var coin = 0;
@@ -24,7 +25,7 @@ const config = {
         height: 1920
     },
     transparent: true,
-    scene: [LoginScreen, HomeScreen, SettingScreen, GameScreen, EndScreen, RegisterScreen, StripeScreen, HelpScreen ],
+    scene: [LoginScreen, HomeScreen, SettingScreen, GameScreen, EndScreen, RegisterScreen, StripeScreen, HelpScreen, ShopScreen ],
     dom: {
         createContainer: true
     },
