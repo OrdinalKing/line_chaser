@@ -15,12 +15,6 @@ class GameScreen extends Phaser.Scene{
     }
 
     create() {
-        let radius = 200;
-        let intensity = 1;
-        this.light = this.add.pointlight(850, 200, -1, radius, intensity).setVisible(false);
-        this.light.color.setTo(50,50,200);
-        this.light_time = 0;
-
         this.completion_audio = this.sound.add('completion');
         this.background_audio = this.sound.add('level_music', {loop: true});
         this.fail_audio = this.sound.add('fail');
@@ -59,6 +53,15 @@ class GameScreen extends Phaser.Scene{
         }
 
         this.coin = this.add.image(700,140,'Coin').setScale(0.15);
+        this.coinPlus = this.add.text(765, 130, '+', { fixedWidth: 50, fixedHeight: 120 })
+        .setStyle({
+            fontSize: '120px',
+            fontFamily: 'RR',
+            fontWeight: 'bold',
+            align: "center",
+            color: '#ffff00',
+        }).setAlpha(0)
+        .setOrigin(0.5,0.5);
         this.coinText = this.add.text(900, 140, userData.coin, { fixedWidth: 300, fixedHeight: 70 })
         .setStyle({
             fontSize: '64px',
@@ -70,6 +73,15 @@ class GameScreen extends Phaser.Scene{
         .setOrigin(0.5,0.5);
 
         this.point = this.add.image(700,260,'Point').setScale(0.15);
+        this.pointPlus = this.add.text(765, 255, '+', { fixedWidth: 50, fixedHeight: 120 })
+        .setStyle({
+            fontSize: '120px',
+            fontFamily: 'RR',
+            fontWeight: 'bold',
+            align: "center",
+            color: '#ffff00',
+        }).setAlpha(0)
+        .setOrigin(0.5,0.5);
         this.pointText = this.add.text(900, 260, userData.point, { fixedWidth: 300, fixedHeight: 70 })
         .setStyle({
             fontSize: '64px',
@@ -260,8 +272,24 @@ class GameScreen extends Phaser.Scene{
             let coin = Math.floor(level/10)*Math.floor(level/10);
             userData.coin = Number.parseInt(userData.coin) + coin;
             userData.point = Number.parseInt(userData.point) + level;
-            this.light.setVisible(true);
-            this.light_time = 1;
+            if(coin>0)
+            {
+                this.coinPlus.setAlpha(1);
+                this.tweens.add({
+                    targets: this.coinPlus,
+                    alpha: 0,
+                    duration: 1500,
+                    ease: 'Power2'
+                  }, this);
+            }
+            this.pointPlus.setAlpha(1);
+            this.tweens.add({
+                targets: this.pointPlus,
+                alpha: 0,
+                duration: 1500,
+                ease: 'Power2'
+              }, this);
+
             Client.level_end(0, coin, level, level);
             bPass = true;
         }

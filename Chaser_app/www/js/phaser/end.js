@@ -61,30 +61,15 @@ class EndScreen extends Phaser.Scene{
 
         this.board = this.add.image(540,1195,'Board');
 
-        if(level>50)
-        {
-            this.resultText = this.add.text(540, 700, 'Congratulations!\nYou have completed ' + (level-1) + ' levels.', { fixedWidth: 1000, fixedHeight: 200 })
-            .setStyle({
-                fontSize: '76px',
-                fontFamily: 'RR',
-                fontWeight: 'bold',
-                align: "center",
-                fill: '#fa5c00',
-            })
-            .setOrigin(0.5,0.5);
-        }
-        else
-        {
-            this.resultText = this.add.text(540, 700, 'You have failed.', { fixedWidth: 1000, fixedHeight: 200 })
-            .setStyle({
-                fontSize: '76px',
-                fontFamily: 'RR',
-                fontWeight: 'bold',
-                align: "center",
-                fill: '#963700',
-            })
-            .setOrigin(0.5,0.5);
-        }
+        this.resultText = this.add.text(540, 700, 'Congratulations!\nYou have completed ' + (level-1) + ' levels.', { fixedWidth: 1000, fixedHeight: 200 })
+        .setStyle({
+            fontSize: '70px',
+            fontFamily: 'RR',
+            fontWeight: 'bold',
+            align: "center",
+            fill: '#fa5c00',
+        })
+        .setOrigin(0.5,0.5);
 
         this.resultText.stroke = "#f0fafe";
         this.resultText.strokeThickness = 32;
