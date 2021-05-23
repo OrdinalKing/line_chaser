@@ -237,6 +237,7 @@ const exportedMethods = {
                         "$push": {
                             "_id": "$_id",
                             "username": "$username",
+                            "level": "$level",
                             "point": "$point"
                         }
                     }
@@ -255,8 +256,7 @@ const exportedMethods = {
             },
             { $sort : {"ranking" : 1}}).toArray();
 
-        const rank_list = await userCollection.find().sort({point:-1}).limit(10).toArray();
-        let a=rank_list[0].username;
+        const rank_list = await userCollection.find().sort({level: -1, point:-1}).limit(10).toArray();
         return {my_rank: my_rank, rank_list: rank_list};
     },
 };
