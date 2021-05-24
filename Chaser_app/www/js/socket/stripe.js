@@ -2,6 +2,10 @@ Client.purchase_coin = function(tokenId, method){
     Client.socket.emit('purchase_coin', {username: userData.username, tokenId : tokenId, method: method});
 };
 
+Client.purchase_coin_paypal = function(orderId, method){
+    Client.socket.emit('purchase_coin_paypal', {username: userData.username, orderId : orderId, method: method});
+};
+
 Client.socket.on('purchase_coin',function(data){
     let activeScene = game.scene.getScenes(true)[0];
     if(data.result)
