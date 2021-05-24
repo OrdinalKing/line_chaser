@@ -3,6 +3,9 @@ const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.users;
 let { ObjectId } = require('mongodb');
 
+const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
+const payPalClient = require('../payPalClient');
+
 const exportedMethods = {
     async getAllUsers() {
         const userCollection = await users();
@@ -64,7 +67,7 @@ const exportedMethods = {
             avatar: 0,
             point: 0,
             heart: 3,
-            coin: 0,
+            coin: 20000,
             revive: 24,
             remove_admob: 0,
             level:0,
@@ -147,6 +150,7 @@ const exportedMethods = {
         console.log(tokenId.id)
         if (!username || !tokenId) {
             console.log('ReferenceError: Username is not supplied while addUserValue');
+            socket.emit('purchase_coin', {result: false});
             return false;
         }
         console.log('stage1')
@@ -156,6 +160,7 @@ const exportedMethods = {
         console.log(user)
         if (!user) {
             // console.log(`Error: user "${username}" not exist while addUserValue`);
+            socket.emit('purchase_coin', {result: false});
             return false;
         }
 
@@ -217,6 +222,63 @@ const exportedMethods = {
             console.log(err)
         }
 
+
+        return true;
+    },
+
+    async purchaseCoin_paypal(username, orderId, method, socket) {
+        if (!username || !orderId) {
+            console.log('ReferenceError: Username is not supplied while addUserValue');
+            socket.emit('purchase_coin', {result: false});
+            return false;
+        }
+        const userCollection = await users();
+        const user = await userCollection.findOne({ username: username });
+        console.log(user)
+        if (!user) {
+            // console.log(`Error: user "${username}" not exist while addUserValue`);
+            socket.emit('purchase_coin', {result: false});
+            return false;
+        }
+
+        try {
+            let request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderId);
+            let order;
+            try {
+              order = await payPalClient.client().execute(request);
+            } catch (err) {
+          
+              // 4. Handle any errors from the call
+              console.error(err);
+              socket.emit('purchase_coin', {result: false});
+            }
+
+            // 5. Validate the transaction details are as expected
+            if (order.result.purchase_units[0].amount.value <= 0) {
+                socket.emit('purchase_coin', {result: false});
+            }
+
+            const updateduserData = user;
+            if(method == 2)
+                updateduserData.coin += 10000;
+            else if(method == 1)
+                updateduserData.coin += 1000;
+            else if(method == 0){
+                var date = new Date();
+                var month = date.getMonth();
+                updateduserData.remove_admob = month;
+            }
+            const updatedInfo = await userCollection.updateOne({ _id: user._id }, { $set: updateduserData });
+    
+            if (updatedInfo.modifiedCount === 0) {
+                console.log('could not update UserValue successfully');
+            }
+            socket.emit('update_userdata', {result: updateduserData});
+            socket.emit('purchase_coin', {result: "Purchase Succeed"});
+                
+        } catch (err) {
+            socket.emit('purchase_coin', {result: false});
+        }
 
         return true;
     },

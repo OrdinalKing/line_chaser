@@ -38,14 +38,14 @@ function initApp() {
 
     var clientIDs = {
         "PayPalEnvironmentProduction": "YOUR_PRODUCTION_KEY", // not needed while testing
-        "PayPalEnvironmentSandbox": "YOUR_SANDBOX_KEY"
+        "PayPalEnvironmentSandbox": "Ae3IHBOoRz44mIEuahijkFDRtNTSk9sWyVKR4aSLkStKyi9b0a7xoy8d-oJ14z3urCSdNy6u8QDjwlgd"
     };
 
     function onPayPalMobileInit() {
         PayPalMobile.prepareToRender(
             "PayPalEnvironmentSandbox", // or "PayPalEnvironmentProduction" 
             new PayPalConfiguration({
-                merchantName: "Thumb Hero",
+                merchantName: "ThumbHero",
                 acceptCreditCards: true,
                 merchantPrivacyPolicyURL: "",
                 merchantUserAgreementURL: ""

@@ -109,6 +109,12 @@ const exportedMethods = {
                 });
             });
 
+            socket.on('purchase_coin_paypal', (data) => {
+                console.log('purchase_coin_paypal request recevied : ', data);
+                users.purchaseCoin_paypal(data.username, data.orderId, data.method, socket).then((result) => {
+                });
+            });
+
             socket.on('ranking', (data) => {
                 console.log('ranking request recevied : ', data);
                 users.ranking(data.username).then((result) => {

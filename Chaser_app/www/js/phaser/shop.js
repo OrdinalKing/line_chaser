@@ -116,7 +116,7 @@ class ShopScreen extends Phaser.Scene{
         
             PayPalMobile.renderSinglePaymentUI(payment,
                 function(payment) {
-                    alert("payment success: " + JSON.stringify(payment));
+                    Client.purchase_coin_paypal(payment.orderId, item_type);
                 },
                 function(error) {
                     let activeScene = game.scene.getScenes(true)[0];
