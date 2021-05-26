@@ -20,6 +20,7 @@
         <preference name="loadUrlTimeoutValue" value="30000" />
         <allow-intent href="market:*" />
         <icon src="www/images/logo.png" />
+        <resource-file src="google-services.json" target="./google-services.json" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

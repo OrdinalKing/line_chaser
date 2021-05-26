@@ -78,7 +78,7 @@ class ShopScreen extends Phaser.Scene{
             }
         });
 
-        this.stripeButton = this.add.image(540,1200,'Stripe');
+        this.stripeButton = this.add.image(540,1000,'Stripe');
         this.stripeButton.setInteractive().on('pointerdown', () => {
             if(item_type == -1)
             {
@@ -89,7 +89,7 @@ class ShopScreen extends Phaser.Scene{
             game.scene.start('StripeScreen');
         });
 
-        this.paypalButton = this.add.image(540,1400,'Paypal');
+        this.paypalButton = this.add.image(540,1200,'Paypal');
         this.paypalButton.setInteractive().on('pointerdown', () => {
             if(item_type == -1)
             {
@@ -122,6 +122,16 @@ class ShopScreen extends Phaser.Scene{
                     let activeScene = game.scene.getScenes(true)[0];
                     toast_error(activeScene, "Purchase failed.");
                 });
+        });
+
+        this.googlepayButton = this.add.image(540,1400,'Googlepay');
+        this.googlepayButton.setInteractive().on('pointerdown', () => {
+            if(item_type == -1)
+            {
+                this.toast_method();
+                return;
+            }
+            
         });
 
         this.backButton = this.add.image(540,1600,'Back');

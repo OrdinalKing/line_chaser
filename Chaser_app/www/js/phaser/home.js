@@ -100,11 +100,6 @@ class HomeScreen extends Phaser.Scene{
             game.scene.stop('HomeScreen');
             game.scene.start('GameScreen');
         });
-        if(userData.heart == 0)
-        {
-            this.play.disableInteractive();
-            this.play.setAlpha(0.5);
-        }
         this.setting = this.add.image(675,450,'Setting');
         this.setting.setInteractive().on('pointerdown', () => {
             game.domContainer.style.display = 'block';
@@ -133,6 +128,13 @@ class HomeScreen extends Phaser.Scene{
         //  Apply the shadow to the Stroke and the Fill (this is the default)
         this.waitingText.setShadow(10, 10, "#333333", 10, true, true);
         Client.ranking();
+        if(userData.heart == 0)
+        {
+            this.play.disableInteractive();
+            this.play.setAlpha(0.5);
+            toast_error(this, 'Please Revive in the setting screen.');
+            this.tweens.add({targets:this.setting, duration:1000, loop: -1, alpha: 0.5, ease: 'Linear', yoyo: true});
+        }
     }
     
     update(){
