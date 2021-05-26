@@ -22,6 +22,35 @@ if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
     initApp();
 }
 
+function initPushwoosh() {
+    var pushwoosh = cordova.require("pushwoosh-cordova-plugin.PushNotification");
+
+  // Should be called before pushwoosh.onDeviceReady
+    document.addEventListener('push-notification', function(event) {
+        var notification = event.notification;
+        console.log(notification);
+        // handle push open here
+    });
+  
+    // Initialize Pushwoosh. This will trigger all pending push notifications on start.
+    pushwoosh.onDeviceReady({
+        appid: "1:627962654539:android:6a16bffd22ea77bf32c2ce",
+        projectid: "627962654539",
+        serviceName: "MPNS_SERVICE_NAME"
+    });
+    pushwoosh.registerDevice(
+        function(status) {
+            var pushToken = status.pushToken;
+            console.log(pushToken);
+            // handle successful registration here
+      },
+      function(status) {
+        console.log(status);
+        // handle registration error here
+      }
+    );
+}
+
 function initApp() {
     if (! AdMob ) { alert( 'admob plugin not ready' ); return; }
     // AdMob.createBanner( {
@@ -55,4 +84,6 @@ function initApp() {
             });
     }
     PayPalMobile.init(clientIDs, onPayPalMobileInit);
+
+	initPushwoosh();
 }

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "627962654539",
+    "project_id": "thumbhero-ee3ca",
+    "storage_bucket": "thumbhero-ee3ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627962654539:android:6a16bffd22ea77bf32c2ce",
+        "android_client_info": {
+          "package_name": "Thumb.Hero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627962654539-qse10nbk0tie6g4up2hjk4u27hraanhn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "Thumb.Hero",
+            "certificate_hash": "2ab02db77aa7afab0ffd1215ead1c8d809a9271e"
+          }
+        },
+        {
+          "client_id": "627962654539-9calrsbv7ajqjiv285hbm8k01ki39ki9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAripwRA8li4U0Dko2v6IQ4n0i_p5prbfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627962654539-9calrsbv7ajqjiv285hbm8k01ki39ki9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
